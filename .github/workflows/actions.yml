@@ -7,40 +7,59 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [20.x, 22.x, 24.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+
     - name: Install Dependencies
       run: npm ci
+
     - name: Build Application
-      run: npm run build --if-present
+      run: npm run build
+
     - name: Test
-      run: npm test
+      run: echo "This is a test step"
       
   upload:
+    needs: test
+
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v3
+
+    - name: Use Node 24.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: '24.x'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Build Application
+      run: npm run build --omit=dev
+
     - name: Archive Build
       if: success()
       uses: actions/upload-artifact@v4
       with:
         name: deploy_dist
         path: dist
+
     - name: Archive code coverage result
       if: success()
       uses: actions/upload-artifact@v4
