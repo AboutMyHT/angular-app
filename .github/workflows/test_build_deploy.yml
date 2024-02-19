@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Application
+        run: npm run build
+
+      - name: Test
+        run: echo "This is a test step"
+
+  build:
+    if: startsWith(github.event.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Application
+        run: npm run build --omit=dev
+
+      - name: Archive Build
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ vars.BUILD_ARTIFACT_NAME }}
+          path: dist
+
+  deploy:
+    if: startsWith(github.event.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ vars.BUILD_ARTIFACT_NAME }}
+          path: dist
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy static site to S3 bucket
+        run: aws s3 sync dist s3://${{ vars.S3_BUCKET_NAME }} --delete
