@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
   github-actions-with-aws-sam
@@ -9,6 +9,19 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+
+  HttpApi:
+    CorsConfiguration:
+      AllowOrigins:
+        - "https://www.aboutmyhometown.com"
+        - "https://aboutmyhometown.com"
+      AllowHeaders:
+        - "Content-Type"
+        - "X-Amz-Date"
+        - "Authorization"
+        - "X-Api-Key"
+      AllowMethods:
+        - "GET"
 
 Resources:
   HelloWorldFunction:
