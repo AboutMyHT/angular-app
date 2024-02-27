@@ -11,7 +11,7 @@ on:
     branches: ["main"]
 
 jobs:
-  test:
+  test-webapp:
     runs-on: ubuntu-latest
 
     strategy:
@@ -36,7 +36,7 @@ jobs:
       - name: Test
         run: echo "This is a test step"
 
-  build:
+  build-webapp:
     if: startsWith(github.event.ref, 'refs/tags/v')
     needs: test
     runs-on: ubuntu-latest
@@ -62,7 +62,7 @@ jobs:
           name: ${{ vars.BUILD_ARTIFACT_NAME }}
           path: dist
 
-  deploy:
+  deploy-webapp:
     if: startsWith(github.event.ref, 'refs/tags/v')
     needs: build
     runs-on: ubuntu-latest
