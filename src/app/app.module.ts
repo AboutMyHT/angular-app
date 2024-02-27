@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { WidgetComponent } from './widget/widget.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WidgetComponent
+    WidgetComponent,
+    CardComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

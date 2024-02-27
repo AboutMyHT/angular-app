@@ -1,0 +1,20 @@
+<div class="card text-start">
+    <img class="card-img-top" src="{{ cardImgURL }}" *ngIf="cardImgURL" />
+    <div class="card-header" *ngIf="header">{{ header }}</div>
+
+    <div class="card-body">
+        <h4 class="card-title">{{ title }}</h4>
+        <h6 class="card-subtitle text-muted">{{ subtitle }}</h6>
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{ body }}</p>
+    </div>
+
+    <div class="card-body" *ngIf="btnPrimaryLink || btnSecondaryLink">
+        <a href="{{ btnPrimaryLink }}" class="card-link btn btn-primary" *ngIf="btnPrimaryLink">{{ btnPrimaryText }}</a>
+        <a href="{{ btnSecondaryLink }}" class="card-link btn btn-secondary" *ngIf="btnSecondaryLink">{{
+            btnSecondaryText }}</a>
+    </div>
+
+    <div class="card-footer text-muted" *ngIf="footer"> {{ footer }}</div>
+</div>
