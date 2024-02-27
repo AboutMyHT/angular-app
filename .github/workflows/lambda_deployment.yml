@@ -29,7 +29,9 @@ jobs:
       # sam build
       - run: sam build --use-container
 
-      # Run Unit tests- Specify unit tests here
+      # Run Unit tests
+      - name: Test
+        run: echo "This is a test step"
 
       # sam deploy
-      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-hello-world --s3-bucket www.aboutmyhometown.com-lambda --capabilities CAPABILITY_IAM --region us-east-2
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name aboutmyhometown-lambda-stack --s3-bucket www.aboutmyhometown.com-lambda --capabilities CAPABILITY_IAM --region us-east-2
