@@ -14,6 +14,9 @@ jobs:
   build-deploy-lambda-functions:
     if: startsWith(github.event.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lambda-functions
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -24,7 +27,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
       # sam build
-      - run: cd lambda-functions
       - run: sam build --use-container
 
       # Run Unit tests- Specify unit tests here
