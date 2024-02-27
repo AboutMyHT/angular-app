@@ -38,7 +38,7 @@ jobs:
 
   build-webapp:
     if: startsWith(github.event.ref, 'refs/tags/v')
-    needs: test
+    needs: test-webapp
     runs-on: ubuntu-latest
 
     steps:
@@ -64,7 +64,7 @@ jobs:
 
   deploy-webapp:
     if: startsWith(github.event.ref, 'refs/tags/v')
-    needs: build
+    needs: build-webapp
     runs-on: ubuntu-latest
 
     steps:
