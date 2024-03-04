@@ -3,12 +3,34 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   aboutmyhometown-lambda-stack
 
+Parameters:
+  DBResourceId:
+    Type: String
+    Description: "RDS-DB instance resource identifier"
+  DBEndpoint:
+    Type: String
+    Description: "Amazon RDS MySQL endpoint"
+  DBName:
+    Type: String
+    Description: "Name of the database connected"
+  DBUsername:
+    Type: String
+    NoEcho: true
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 3
 
 Resources:
+  DependenciesLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub "${AWS::StackName}-Dependencies"
+      ContentUri: dependencies/
+      CompatibleRuntimes:
+        - python3.12
+
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -23,6 +45,21 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+      Environment:
+        Variables:
+          DB_HOST: !Ref DBEndpoint
+          DB_USER: !Ref DBUsername
+          DB_NAME: !Ref DBName
+      Layers:
+        - !Ref DependenciesLayer
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            Effect: Allow
+            Action:
+              - rds-db:connect
+            Resource:
+              - !Sub "arn:aws:rds-db:${AWS::Region}:${AWS::AccountId}:dbuser:${DBResourceId}/${DBUsername}"
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

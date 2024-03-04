@@ -1,42 +1,61 @@
+import boto3
+import logging
+import pymysql
+import os
 import json
 
-# import requests
+logger = logging.getLogger()
+
+
+# Get authentication token from RDS
+rds_client = boto3.client("rds")
+auth_token = rds_client.generate_db_auth_token(
+    os.environ["DB_HOST"], 3306, os.environ["DB_USER"]
+)
+
+logger.debug("response from generate_db_auth_token")
+logger.debug(auth_token)
+
+# Construct SSL
+ssl = {"ca": "/opt/python/rds-combined-ca-bundle.pem"}
+
+# Create connection
+db_connection = pymysql.connect(
+    host=os.environ["DB_HOST"],
+    port=3306,
+    user=os.environ["DB_USER"],
+    passwd=auth_token,
+    db=os.environ["DB_NAME"],
+    charset="utf8",
+    ssl=ssl,
+    connect_timeout=5,
+)
+
+logger.debug("SUCCESS: Connection to MySQL database succeeded")
 
 
 def lambda_handler(event, context):
-    """Sample pure Lambda function
+    """
+    Main entry of the AWS Lambda function.
+    """
+    logger.info("Hello world!")
+    return prepare_and_execute_query()
 
-    Parameters
-    ----------
-    event: dict, required
-        API Gateway Lambda Proxy Input Format
 
-        Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
-
-    context: object, required
-        Lambda Context runtime methods and attributes
-
-        Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
-
-    Returns
-    ------
-    API Gateway Lambda Proxy Output Format: dict
-
-        Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
+def prepare_and_execute_query():
+    """
+    Execute the query on the MySQL database
     """
 
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
+    with db_connection.cursor(pymysql.cursors.DictCursor) as cur:
+        try:
+            sql_query = "select * from information_schema.tables;"
 
-    #     raise e
+            items = cur.execute(sql_query)
+            db_connection.commit()
 
-    return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
-    }
+            return items
+
+        except Exception as e:
+            db_connection.rollback()
+            raise e
