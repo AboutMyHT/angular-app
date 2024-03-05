@@ -45,9 +45,16 @@ warm_containers = "EAGER"
 [default.local_start_lambda.parameters]
 warm_containers = "EAGER"
 
+## PRODUCTION CONFIGURATION
 [production]
 
 [production.deploy.parameters]
+capabilities = "CAPABILITY_IAM"
+confirm_changeset = true
+resolve_s3 = true
+s3_prefix = "aboutmyhometown-lambda-stack"
+region = "us-east-2"
+image_repositories = []
 parameter_overrides = [
     "DBResourceId=db-YK7C25ZS4DZ5LRNCJPJLFTY63E",
     "DBEndpoint=aboutmyhometown-mysql-db.cbwwy2ok6gha.us-east-2.rds.amazonaws.com",
