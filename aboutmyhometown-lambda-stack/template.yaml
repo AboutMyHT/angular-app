@@ -19,6 +19,15 @@ Parameters:
   DBVPCSecurityGroup:
     Type: String
     Description: "Security group for the RDS-DB instance"
+  Subnet1:
+    Type: String
+    Description: "Subnet 1 for the RDS-DB instance"
+  Subnet2:
+    Type: String
+    Description: "Subnet 2 for the RDS-DB instance"
+  Subnet3:
+    Type: String
+    Description: "Subnet 3 for the RDS-DB instance"
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -27,6 +36,10 @@ Globals:
     VpcConfig:
       SecurityGroupIds:
         - !Ref DBVPCSecurityGroup
+      SubnetIds:
+        - !Ref Subnet1
+        - !Ref Subnet2
+        - !Ref Subnet3
 
 Resources:
   DependenciesLayer:
