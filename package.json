@@ -2,6 +2,10 @@
   "name": "aboutmyhometown.com",
   "version": "0.0.0",
   "scripts": {
+    "ng": "ng",
+    "test": "ng test",
+    "start": "ng serve",
+    "build": "ng build",
     "watch": "ng build --watch",
     "start-app": "ng serve --open --port 4200",
     "start-api": "cd aboutmyhometown-lambda-stack && sam local start-api -p 4201",
