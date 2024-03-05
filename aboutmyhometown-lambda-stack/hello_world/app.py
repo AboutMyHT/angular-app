@@ -6,17 +6,11 @@ import json
 
 logger = logging.getLogger()
 
-print("starting")
-
-
 # Get authentication token from RDS
 rds_client = boto3.client("rds")
 auth_token = rds_client.generate_db_auth_token(
     os.environ["DB_HOST"], 3306, os.environ["DB_USER"]
 )
-
-print("response from generate_db_auth_token")
-print(auth_token)
 
 # Construct SSL
 ssl = {"ca": "/opt/python/us-east-2-bundle.pem"}
@@ -41,7 +35,10 @@ def lambda_handler(event, context):
     Main entry of the AWS Lambda function.
     """
     logger.info("Hello world!")
-    return prepare_and_execute_query()
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"num": prepare_and_execute_query()}),
+    }
 
 
 def prepare_and_execute_query():
