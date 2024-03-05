@@ -16,11 +16,17 @@ Parameters:
   DBUsername:
     Type: String
     NoEcho: true
+  DBVPCSecurityGroup:
+    Type: String
+    Description: "Security group for the RDS-DB instance"
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 3
+    VpcConfig:
+      SecurityGroupIds:
+        - !Ref DBVPCSecurityGroup
 
 Resources:
   DependenciesLayer:

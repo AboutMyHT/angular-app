@@ -26,6 +26,7 @@ parameter_overrides = [
     "DBEndpoint=aboutmyhometown-mysql-db.cbwwy2ok6gha.us-east-2.rds.amazonaws.com",
     "DBName=amht",
     "DBUsername=lambda-user",
+    "DBVPCSecurityGroup=sg-0a3455a8826b4b4ad"
 ]
 
 [default.package.parameters]

@@ -6,6 +6,8 @@ import json
 
 logger = logging.getLogger()
 
+print("starting")
+
 
 # Get authentication token from RDS
 rds_client = boto3.client("rds")
@@ -13,8 +15,8 @@ auth_token = rds_client.generate_db_auth_token(
     os.environ["DB_HOST"], 3306, os.environ["DB_USER"]
 )
 
-logger.debug("response from generate_db_auth_token")
-logger.debug(auth_token)
+print("response from generate_db_auth_token")
+print(auth_token)
 
 # Construct SSL
 ssl = {"ca": "/opt/python/rds-combined-ca-bundle.pem"}
