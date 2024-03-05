@@ -19,14 +19,14 @@ print("response from generate_db_auth_token")
 print(auth_token)
 
 # Construct SSL
-ssl = {"ca": "/opt/python/rds-combined-ca-bundle.pem"}
+ssl = {"ca": "/opt/python/us-east-2-bundle.pem"}
 
 # Create connection
 db_connection = pymysql.connect(
     host=os.environ["DB_HOST"],
-    port=3306,
     user=os.environ["DB_USER"],
     passwd=auth_token,
+    port=3306,
     db=os.environ["DB_NAME"],
     charset="utf8",
     ssl=ssl,
