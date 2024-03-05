@@ -53,7 +53,7 @@ jobs:
         run: npm ci
 
       - name: Build Application
-        run: npm run build --omit=dev
+        run: ng build --configuration=production
 
       - name: Archive Build
         if: success()
