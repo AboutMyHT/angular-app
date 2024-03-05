@@ -30,6 +30,7 @@ parameter_overrides = [
     "Subnet1=subnet-0d7c67beb29af83cc",
     "Subnet2=subnet-00aa280dcd38ceb60",
     "Subnet3=subnet-01c2ceaeb6ab2c320",
+    "FNEnvironment=development"
 ]
 
 [default.package.parameters]
@@ -43,3 +44,18 @@ warm_containers = "EAGER"
 
 [default.local_start_lambda.parameters]
 warm_containers = "EAGER"
+
+[production]
+
+[production.deploy.parameters]
+parameter_overrides = [
+    "DBResourceId=db-YK7C25ZS4DZ5LRNCJPJLFTY63E",
+    "DBEndpoint=aboutmyhometown-mysql-db.cbwwy2ok6gha.us-east-2.rds.amazonaws.com",
+    "DBName=amht",
+    "DBUsername=lambda-user",
+    "DBVPCSecurityGroup=sg-0a3455a8826b4b4ad",
+    "Subnet1=subnet-0d7c67beb29af83cc",
+    "Subnet2=subnet-00aa280dcd38ceb60",
+    "Subnet3=subnet-01c2ceaeb6ab2c320",
+    "FNEnvironment=production"
+]

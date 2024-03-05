@@ -28,11 +28,20 @@ Parameters:
   Subnet3:
     Type: String
     Description: "Subnet 3 for the RDS-DB instance"
+  FNEnvironment:
+    Type: String
+    Description: "Environment for the Lambda function"
+    Default: "development"
+    AllowedValues:
+      - development
+      - production
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 20
+    Handler: app.lambda_handler
+    Runtime: python3.12
     VpcConfig:
       SecurityGroupIds:
         - !Ref DBVPCSecurityGroup
@@ -40,6 +49,14 @@ Globals:
         - !Ref Subnet1
         - !Ref Subnet2
         - !Ref Subnet3
+    Environment:
+      Variables:
+        ENVIRONMENT: !Ref FNEnvironment
+        DB_HOST: !Ref DBEndpoint
+        DB_USER: !Ref DBUsername
+        DB_NAME: !Ref DBName
+    Layers:
+      - !Ref DependenciesLayer
 
 Resources:
   DependenciesLayer:
@@ -54,8 +71,6 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: hello_world/
-      Handler: app.lambda_handler
-      Runtime: python3.12
       Architectures:
         - x86_64
       Events:
@@ -64,13 +79,6 @@ Resources:
           Properties:
             Path: /hello
             Method: get
-      Environment:
-        Variables:
-          DB_HOST: !Ref DBEndpoint
-          DB_USER: !Ref DBUsername
-          DB_NAME: !Ref DBName
-      Layers:
-        - !Ref DependenciesLayer
       Policies:
         - Version: "2012-10-17"
           Statement:
