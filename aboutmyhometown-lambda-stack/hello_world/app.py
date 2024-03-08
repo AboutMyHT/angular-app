@@ -1,11 +1,9 @@
-import time
-import json
 import logging
 
 from amht_custom import get_rds_session
-from amht_custom.sqla.models.tables import User
+from amht_custom.http_utils import invalid_response, valid_response
+from amht_custom.db_utils.users import create_user
 
-from sqlalchemy.orm import Session
 
 logger = logging.getLogger()
 
@@ -14,32 +12,35 @@ def lambda_handler(event, context):
     """
     Main entry of the AWS Lambda function.
     """
-    with get_rds_session()() as session:
-        return {
-            "statusCode": 200,
-            "body": json.dumps({"users": get_all_users(session)}),
-        }
+    get_parameters = event.get("queryStringParameters") or {}
 
+    if (
+        get_parameters.get("email") is None
+        or get_parameters.get("password") is None
+        or get_parameters.get("zip_code") is None
+    ):
+        return invalid_response(
+            "The email, password, and zip code parameters are required.",
+            400,
+        )
 
-def get_all_users(
-    session: Session,
-):
-    """
-    Execute the query on the MySQL database
-    """
-
-    new_user = User(
-        name="John Doe",
-        email="test@test.com" + str(time.time())[-4:],
-        password_hash="test",
-    )
-    session.add(new_user)
-    session.commit()
-
-    users = session.query(User).all()
-
-    user_str = []
-    for user in users:
-        user_str.append(f"Name: {user.name}, Email: {user.email}")
-
-    return user_str
+    try:
+        with get_rds_session()() as session:
+            return valid_response(
+                {
+                    "new_user": create_user(
+                        session=session,
+                        email=get_parameters["email"],
+                        zip_code=get_parameters["zip_code"],
+                        password_rawstring=get_parameters["password"],
+                        first_name=get_parameters.get("first_name"),
+                        last_name=get_parameters.get("last_name"),
+                    )
+                },
+                200,
+            )
+    except ValueError as error:
+        return invalid_response(
+            str(error),
+            400,
+        )
