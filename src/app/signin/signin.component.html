@@ -1,0 +1,63 @@
+<div class="container">
+    <!-- Logo container -->
+    <div class="logo-container">
+        <!-- Replace the src attribute with your logo image -->
+        <img src="../../assets/amh.gif" alt="Logo" class="logo">
+    </div>
+
+    <!-- Sign-in form -->
+    <div class="form-signin">
+        <h1>About My Hometown</h1>
+        <h2 id="actionText">Sign In</h2>
+        <form>
+            <div class="form-floating">
+                <p id="emailMessage" style="display: none;">Enter your email and we will send you a link to reset your
+                    password.</p>
+            </div>
+
+            <div id="regGroup" style="display: none;">
+                <label for="fname">First Name</label>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="fname" placeholder="First Name">
+                </div>
+
+                <label for="lname">Last Name</label>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="lname" placeholder="Last Name">
+                </div>
+
+
+                <label for="phone">Phone</label>
+                <div class="form-floating">
+                    <input type="phone" class="form-control" id="phone">
+                </div>
+
+                <label for="zip">Zip Code</label>
+                <div class="form-floating">
+                    <input type="number" [maxLength]="5" minlength="5" class="form-control" id="zip">
+                </div>
+            </div>
+
+            <label for="email">Email address</label>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="email" placeholder="Email">
+            </div>
+
+            <div id="pswGroup">
+                <label for="password">Password</label>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+            </div>
+                <div id="forgotPSW" class="forgot-password">
+                    <p id="forgot" class="like-a-link" (click)="onClick($event)">Forgot your password?</p>
+                </div>
+
+            <button id="submitButton" type="submit">Sign in</button>
+        </form>
+        <div class="signup-link">
+            <p id="donthave" class="inline">Don't have an account? </p>
+            <p id="register" class="inline like-a-link" (click)="onClick($event)">Sign up here</p>
+        </div>
+    </div>
+</div>
