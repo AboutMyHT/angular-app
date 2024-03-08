@@ -1,0 +1,31 @@
+.card {
+    max-width: 320px;
+    min-width: 250px;
+    margin: auto;
+}
+
+.card-header {
+    background-color: rgb(219, 31, 31);
+    color: white;
+    font-size: large;
+}
+
+.card-body {
+    background-color: rgb(188, 210, 230);
+    height: 300px;
+}
+
+.card-footer {
+    background-color:  rgb(204, 134, 43);
+}
+
+.card-title {
+    font-size: large;
+    font-weight: bold;
+}
+
+@media (max-width: 500px) {
+    .card {
+        margin: auto;
+    }
+}
