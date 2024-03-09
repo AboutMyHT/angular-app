@@ -9,7 +9,7 @@
     "build-prod": "ng build --configuration=production",
     "watch": "ng build --watch",
     "start-app": "ng serve --open --port 4200",
-    "start-api": "cd aboutmyhometown-lambda-stack && python -m pip install -r dependencies/python/requirements.txt -t dependencies/python --upgrade && sam local start-api -p 4201",
+    "start-api": "cd aboutmyhometown-lambda-stack && sam local start-api -p 4201",
     "start-all": "concurrently \"npm run start-app\" \"npm run start-api\""
   },
   "private": true,

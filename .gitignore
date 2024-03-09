@@ -291,8 +291,3 @@ $RECYCLE.BIN/
 # Custom
 
 .todo
-
-aboutmyhometown-lambda-stack/dependencies/python/*
-!aboutmyhometown-lambda-stack/dependencies/python/amht_custom
-!aboutmyhometown-lambda-stack/dependencies/python/requirements.txt
-!aboutmyhometown-lambda-stack/dependencies/python/us-east-2-bundle.pem
