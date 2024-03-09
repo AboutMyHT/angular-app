@@ -2,7 +2,6 @@ import os
 import logging
 
 import boto3
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from amht_custom.sqla.models.tables import Base
@@ -20,7 +19,13 @@ def get_rds_session() -> sessionmaker:
     """
 
     if NOT_PROD:
-        ENGINE = create_engine("sqlite:////tmp/local_database.db")
+        ENGINE = _get_create_engine(
+            username="root",
+            host="172.17.0.2",
+            database="mydb",
+            password="localpass",
+            port=3306,
+        )
     else:
         # Get authentication token from RDS
         rds_client = boto3.client("rds")

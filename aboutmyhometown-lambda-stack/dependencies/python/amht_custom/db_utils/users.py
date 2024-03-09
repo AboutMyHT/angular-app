@@ -1,5 +1,6 @@
 import html
 import logging
+from typing import List
 
 from amht_custom.sqla.models.tables import User
 
@@ -29,6 +30,22 @@ def get_user(
     return user
 
 
+def list_users(
+    session: Session,
+) -> List[User]:
+    """
+    Get all users from the database
+
+    Return a list of user objects if found
+
+    Raises ValueError if the user is not found
+    """
+
+    users = session.query(User).all()
+
+    return users
+
+
 def check_password(
     session: Session,
     user_email: str,
@@ -47,7 +64,9 @@ def check_password(
     if user is None:
         raise ValueError("User not found!")
 
-    if not bcrypt.checkpw(password_rawstring.encode("utf-8"), user.password_hash):
+    if not bcrypt.checkpw(
+        password_rawstring.encode("utf-8"), user.password_hash.encode("utf-8")
+    ):
         return False
 
     return True

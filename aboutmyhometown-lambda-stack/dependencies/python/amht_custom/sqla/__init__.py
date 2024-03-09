@@ -87,6 +87,6 @@ def _get_create_engine(
 
     logger.debug("SQLA Connection %s was not open, creating new...", engine_locator)
     _engines[engine_locator] = create_engine(
-        engine_url, echo=echo, connect_args=connect_args
+        engine_url, echo=echo, connect_args=connect_args or {}
     )
     return _engines[engine_locator]
