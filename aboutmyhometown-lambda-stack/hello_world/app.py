@@ -1,7 +1,7 @@
 import logging
 
 from amht_custom import get_rds_session
-from amht_custom.http_utils import invalid_response, valid_response
+from amht_custom.http_utils import api_response
 from amht_custom.db_utils.users import list_users
 
 
@@ -18,7 +18,7 @@ def lambda_handler(event, context):
         get_parameters.get("temp_endpoint") is None
         or get_parameters.get("temp_endpoint") != "temp_endpoint"
     ):
-        return invalid_response(
+        return api_response(
             "Not available",
             400,
         )
@@ -26,14 +26,14 @@ def lambda_handler(event, context):
     try:
         with get_rds_session()() as session:
             users = [user.email for user in list_users(session)]
-            return valid_response(
+            return api_response(
                 {
                     "users": users,
                 },
                 200,
             )
     except ValueError as error:
-        return invalid_response(
+        return api_response(
             str(error),
             400,
         )

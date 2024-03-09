@@ -2,7 +2,7 @@ import json
 import logging
 
 from amht_custom import get_rds_session
-from amht_custom.http_utils import invalid_response, valid_response
+from amht_custom.http_utils import api_response
 from amht_custom.db_utils.users import (
     create_user,
     get_user,
@@ -22,14 +22,14 @@ def lambda_handler(event, context):
     try:
         post_body = json.loads(event.get("body"))
     except json.JSONDecodeError:
-        return invalid_response("Invalid JSON body.", 400)
+        return api_response("Invalid JSON body.", 400)
 
     if (
         post_body.get("email") is None
         or post_body.get("password") is None
         or post_body.get("zip_code") is None
     ):
-        return invalid_response(
+        return api_response(
             "The email, password, and zip code parameters are required.",
             400,
         )
@@ -56,7 +56,7 @@ def lambda_handler(event, context):
             )
 
             if new_user:
-                return valid_response(
+                return api_response(
                     {
                         "message": "User created successfully",
                         "user": {
@@ -74,9 +74,9 @@ def lambda_handler(event, context):
                     200,
                 )
     except ValueError as error:
-        return invalid_response(
+        return api_response(
             str(error),
             400,
         )
 
-    return invalid_response("An unexpected error occured!", 500)
+    return api_response("An unexpected error occured!", 500)
