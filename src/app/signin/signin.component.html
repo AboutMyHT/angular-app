@@ -43,15 +43,16 @@
                 <input type="email" class="form-control" id="email" placeholder="Email">
             </div>
 
-            <div id="pswGroup">
+            <section id="pswGroup">
                 <label for="password">Password</label>
                 <div class="form-floating">
                     <input type="password" class="form-control" id="password" placeholder="Password">
                 </div>
+            </section>
+            
+            <div id="forgotPSW" class="forgot-password">
+                <p id="forgot" class="like-a-link" (click)="onClick($event)">Forgot your password?</p>
             </div>
-                <div id="forgotPSW" class="forgot-password">
-                    <p id="forgot" class="like-a-link" (click)="onClick($event)">Forgot your password?</p>
-                </div>
 
             <button id="submitButton" type="submit">Sign in</button>
         </form>

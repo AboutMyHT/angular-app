@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CurrentComponent } from './current/current.component';
 
 @Component({
   selector: 'app-weather',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent {
+
+  @Input() zip: number = 0;
+
 
 }

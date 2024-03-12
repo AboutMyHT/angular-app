@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 h3 text-center">{{weather!.location.name}}, {{weather!.location.region}}</div>
+    </div>
+    <div class="row">
+        <div class="col-12 h5 text-center">Current Weather</div>
+        <div class="col-12 text-center"><small><small>Last Updated {{weather?.current?.last_updated?.slice(11)}}</small></small></div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-end align-bottom"><img class="mainicon" src="{{getIcon(weather!.current.condition.icon)}}"></div>
+        <div class="col-6">
+            <div class="fs-4 fw-bold">{{getTemp("f")}}</div>
+            <div class="fs-6 fw-normal">Feels like {{getFeelsLike("f")}}</div>
+            <div class="fw-normal">{{weather!.current.condition.text}}</div>
+            <div class="fw-normal">💨{{weather!.current.wind_mph}}mph {{weather!.current.wind_dir}} 
+            <img src="../../../assets/humidity.png" style="margin-top: -5px; width: 12px; height: 15px; display: inline;"> {{weather!.current.humidity}}%</div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-4 text-center" *ngFor="let i of [0,1,2]">
+            <div>{{data.getDOW(weather!.forecast.forecastday[i].date)}}</div>
+            <img class="icon" src="{{getIcon(weather!.forecast.forecastday[i].day.condition.icon)}}">
+            <div>{{weather!.forecast.forecastday[i].day.mintemp_f}}&deg; {{weather!.forecast.forecastday[i].day.maxtemp_f}}&deg;</div>
+        </div>
+    </div>
+</div>

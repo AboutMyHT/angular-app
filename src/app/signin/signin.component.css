@@ -1,9 +1,9 @@
-html, body {
+/* html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-}
+} */
 
 .container {
     max-width: 800px; 
@@ -22,6 +22,11 @@ h1, h2, h3 {
 .logo {
     width: 200px;
     margin-right: 50px;
+}
+
+#pswGroup {
+    position: relative;
+    margin-top: -20px;
 }
 
 form {
@@ -72,10 +77,6 @@ form {
 .signup-link {
     text-align: center;
     margin-top: 10px;
-}
-
-#emailMessage {
-    text-align: center;
 }
 
 .logo-container {
