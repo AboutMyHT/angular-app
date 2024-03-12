@@ -9,6 +9,7 @@ import { WeatherComponent } from './weather/weather.component';
 import { SigninComponent } from './signin/signin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { CurrentComponent } from './weather/current/current.component';
 
 
 
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
     CardComponent,
     WeatherComponent,
     SigninComponent,
-    HomeComponent
+    HomeComponent,
+    CurrentComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule,

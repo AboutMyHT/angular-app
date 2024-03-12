@@ -1,0 +1,15 @@
+.container {
+    margin-top: 25px;
+    padding: 15px;
+    max-width: 400px;
+}
+
+.mainicon {
+    width: 100px;
+    height: 100px;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+}
