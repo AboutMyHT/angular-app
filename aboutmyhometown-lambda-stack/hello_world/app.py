@@ -1,42 +1,39 @@
-import json
+import logging
 
-# import requests
+from amht_custom import get_rds_session
+from amht_custom.http_utils import api_response
+from amht_custom.db_utils.users import list_users
+
+
+logger = logging.getLogger()
 
 
 def lambda_handler(event, context):
-    """Sample pure Lambda function
-
-    Parameters
-    ----------
-    event: dict, required
-        API Gateway Lambda Proxy Input Format
-
-        Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
-
-    context: object, required
-        Lambda Context runtime methods and attributes
-
-        Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
-
-    Returns
-    ------
-    API Gateway Lambda Proxy Output Format: dict
-
-        Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
+    Main entry of the AWS Lambda function.
+    """
+    get_parameters = event.get("queryStringParameters") or {}
 
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
+    if (
+        get_parameters.get("temp_endpoint") is None
+        or get_parameters.get("temp_endpoint") != "temp_endpoint"
+    ):
+        return api_response(
+            "Not available",
+            400,
+        )
 
-    #     raise e
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
-    }
+    try:
+        with get_rds_session()() as session:
+            users = [user.email for user in list_users(session)]
+            return api_response(
+                {
+                    "users": users,
+                },
+                200,
+            )
+    except ValueError as error:
+        return api_response(
+            str(error),
+            400,
+        )

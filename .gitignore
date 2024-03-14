@@ -288,8 +288,9 @@ $RECYCLE.BIN/
 
 .aws-sam
 
-# End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
-
 # Custom
 
 .todo
+
+
+!aboutmyhometown-lambda-stack/dependencies/python/*/*

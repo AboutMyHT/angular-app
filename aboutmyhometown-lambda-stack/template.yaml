@@ -3,26 +3,114 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   aboutmyhometown-lambda-stack
 
+Parameters:
+  DBResourceId:
+    Type: String
+    Description: "RDS-DB instance resource identifier"
+  DBEndpoint:
+    Type: String
+    Description: "Amazon RDS MySQL endpoint"
+  DBName:
+    Type: String
+    Description: "Name of the database connected"
+  DBUsername:
+    Type: String
+    NoEcho: true
+  DBVPCSecurityGroup:
+    Type: String
+    Description: "Security group for the RDS-DB instance"
+  Subnet1:
+    Type: String
+    Description: "Subnet 1 for the RDS-DB instance"
+  Subnet2:
+    Type: String
+    Description: "Subnet 2 for the RDS-DB instance"
+  Subnet3:
+    Type: String
+    Description: "Subnet 3 for the RDS-DB instance"
+  FNEnvironment:
+    Type: String
+    Description: "Environment for the Lambda function"
+    Default: "development"
+    AllowedValues:
+      - development
+      - production
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 20
+    Handler: app.lambda_handler
+    Runtime: python3.12
+    VpcConfig:
+      SecurityGroupIds:
+        - !Ref DBVPCSecurityGroup
+      SubnetIds:
+        - !Ref Subnet1
+        - !Ref Subnet2
+        - !Ref Subnet3
+    Environment:
+      Variables:
+        ENVIRONMENT: !Ref FNEnvironment
+        DB_HOST: !Ref DBEndpoint
+        DB_USER: !Ref DBUsername
+        DB_NAME: !Ref DBName
+    Layers:
+      - !Ref DependenciesLayer
+
+# More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+# More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
 
 Resources:
+  DependenciesLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub "${AWS::StackName}-Dependencies"
+      ContentUri: dependencies/
+      CompatibleRuntimes:
+        - python3.12
+
   HelloWorldFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: hello_world/
-      Handler: app.lambda_handler
-      Runtime: python3.12
       Architectures:
         - x86_64
       Events:
         HelloWorld:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
             Path: /hello
             Method: get
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            Effect: Allow
+            Action:
+              - rds-db:connect
+            Resource:
+              - !Sub "arn:aws:rds-db:${AWS::Region}:${AWS::AccountId}:dbuser:${DBResourceId}/${DBUsername}"
+
+  LoginFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: login/
+      Architectures:
+        - x86_64
+      Events:
+        Login:
+          Type: Api
+          Properties:
+            Path: /login
+            Method: post
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            Effect: Allow
+            Action:
+              - rds-db:connect
+            Resource:
+              - !Sub "arn:aws:rds-db:${AWS::Region}:${AWS::AccountId}:dbuser:${DBResourceId}/${DBUsername}"
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -37,3 +125,12 @@ Outputs:
   HelloWorldFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn
+  LoginApi:
+    Description: "API Gateway endpoint URL for Prod stage for Login function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/login/"
+  LoginFunction:
+    Description: "Login Lambda Function ARN"
+    Value: !GetAtt LoginFunction.Arn
+  LoginFunctionIamRole:
+    Description: "Implicit IAM Role created for Login function"
+    Value: !GetAtt LoginFunctionRole.Arn
