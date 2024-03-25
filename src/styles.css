@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.like-a-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.like-a-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.control-label.required::before {
+    content: "*";
+    color: red;
+    margin-right: 4px;
+}

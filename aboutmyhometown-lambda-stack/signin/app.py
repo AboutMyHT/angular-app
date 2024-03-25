@@ -42,12 +42,13 @@ def lambda_handler(event, context):
     # Check if the required parameters are present
     if post_body.get("email") is None or post_body.get("password") is None:
         return api_response(
-            "The email and password parameters are required to log in!",
+            "The email and password parameters are required!",
             400,
         )
 
     try:
         with get_rds_session()() as session:
+            logger.debug("Checking password.")
             is_valid_password = check_password(
                 session, post_body["email"], post_body["password"]
             )
@@ -57,25 +58,22 @@ def lambda_handler(event, context):
 
                 return api_response(
                     {
-                        "user": {
-                            "email": user_in_db.email,
-                            "first_name": user_in_db.first_name,
-                            "last_name": user_in_db.last_name,
-                            "zip_code": user_in_db.zip_code,
-                        },
+                        "user": user_in_db.as_dict(),
                     },
                     200,
                 )
             else:
+                logger.info("Failed to authenticate user.")
                 return api_response(
-                    "Invalid email or password!",
+                    "Invalid email or password",
                     401,
                 )
 
     except ValueError as error:
+        logger.info(f"Error: {error}")
         return api_response(
-            str(error),
-            400,
+            "Invalid email or password",
+            401,
         )
 
     return api_response("An unexpected error occured!", 500)
