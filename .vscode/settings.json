@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "aboutmyhometown-lambda-stack/dependencies/python"
+    ]
+}
