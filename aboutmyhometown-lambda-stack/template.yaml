@@ -35,6 +35,10 @@ Parameters:
     AllowedValues:
       - development
       - production
+  CORSOrigin:
+    Type: String
+    Description: "CORS Origin"
+    Default: "*"
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -57,6 +61,12 @@ Globals:
         DB_NAME: !Ref DBName
     Layers:
       - !Ref DependenciesLayer
+  Api:
+    Cors:
+      AllowCredentials: False
+      AllowHeaders: "'*'"
+      AllowMethods: "'POST, OPTIONS'"
+      AllowOrigin: !Sub "'${CORSOrigin}'"
 
 # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -70,18 +80,18 @@ Resources:
       CompatibleRuntimes:
         - python3.12
 
-  HelloWorldFunction:
+  SignupFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: hello_world/
+      CodeUri: signup/
       Architectures:
         - x86_64
       Events:
-        HelloWorld:
+        Signup:
           Type: Api
           Properties:
-            Path: /hello
-            Method: get
+            Path: /signup
+            Method: post
       Policies:
         - Version: "2012-10-17"
           Statement:
@@ -91,17 +101,17 @@ Resources:
             Resource:
               - !Sub "arn:aws:rds-db:${AWS::Region}:${AWS::AccountId}:dbuser:${DBResourceId}/${DBUsername}"
 
-  LoginFunction:
+  SigninFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: login/
+      CodeUri: signin/
       Architectures:
         - x86_64
       Events:
-        Login:
+        Signin:
           Type: Api
           Properties:
-            Path: /login
+            Path: /signin
             Method: post
       Policies:
         - Version: "2012-10-17"
@@ -116,21 +126,21 @@ Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  HelloWorldApi:
-    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
-  LoginApi:
-    Description: "API Gateway endpoint URL for Prod stage for Login function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/login/"
-  LoginFunction:
-    Description: "Login Lambda Function ARN"
-    Value: !GetAtt LoginFunction.Arn
-  LoginFunctionIamRole:
-    Description: "Implicit IAM Role created for Login function"
-    Value: !GetAtt LoginFunctionRole.Arn
+  SignupApi:
+    Description: "API Gateway endpoint URL for Prod stage for Signup function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/signup/"
+  SignupFunction:
+    Description: "Signup Lambda Function ARN"
+    Value: !GetAtt SignupFunction.Arn
+  SignupFunctionIamRole:
+    Description: "Implicit IAM Role created for Signup function"
+    Value: !GetAtt SignupFunctionRole.Arn
+  SigninApi:
+    Description: "API Gateway endpoint URL for Prod stage for Signin function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/signin/"
+  SigninFunction:
+    Description: "Signin Lambda Function ARN"
+    Value: !GetAtt SigninFunction.Arn
+  SigninFunctionIamRole:
+    Description: "Implicit IAM Role created for Signin function"
+    Value: !GetAtt SigninFunctionRole.Arn

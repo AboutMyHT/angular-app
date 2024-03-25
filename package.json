@@ -8,14 +8,17 @@
     "build": "ng build",
     "build-prod": "ng build --configuration=production",
     "watch": "ng build --watch",
-    "start-app": "ng serve --open --port 4200",
+    "start-app": "ng serve --open --watch --port 4200",
     "start-api": "start-api.bat",
-    "start-all": "concurrently \"npm run start-app\" \"npm run start-api\""
+    "start-all": "concurrently \"npm run start-app\" \"npm run start-api\"",
+    "start-api-linux": "./start-api.sh",
+    "start-all-linux": "concurrently \"npm run start-app\" \"npm run start-api-linux\"; npm run cleanup",
+    "cleanup": "docker stop my-local-mysql && docker rm my-local-mysql"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.0.0",
-    "@angular/cli": "^17.2.1",
+    "@angular/cli": "^17.3.1",
     "@angular/common": "^14.0.0",
     "@angular/compiler": "^14.0.0",
     "@angular/core": "^14.0.0",
@@ -24,6 +27,7 @@
     "@angular/platform-browser-dynamic": "^14.3.0",
     "@angular/router": "^14.3.0",
     "bootstrap": "^5.3.3",
+    "node.js": "^0.0.1-security",
     "rxjs": "~7.5.0",
     "tslib": "^2.6.2",
     "zone.js": "^0.11.8"
