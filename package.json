@@ -8,7 +8,7 @@
     "build": "ng build",
     "build-prod": "ng build --configuration=production",
     "watch": "ng build --watch",
-    "start-app": "ng serve --open --port 4200",
+    "start-app": "ng serve --open --watch --port 4200",
     "start-api": "start-api.bat",
     "start-all": "concurrently \"npm run start-app\" \"npm run start-api\"",
     "start-api-linux": "./start-api.sh",

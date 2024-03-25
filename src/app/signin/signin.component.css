@@ -6,7 +6,7 @@
 } */
 
 .container {
-    max-width: 800px; 
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     display: flex;
@@ -15,30 +15,35 @@
     flex-direction: column;
 }
 
-h1, h2, h3 {
-    margin-top: 0;
-}
-
 .logo {
     width: 200px;
     margin-right: 50px;
 }
 
-#pswGroup {
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    max-width: 100%;
+}
+
+.form-floating {
     position: relative;
-    margin-top: -20px;
+    margin-bottom: 10px;
 }
 
 form {
+    min-width: 400px;
     max-width: 400px;
 }
 
-.form-signin .form-floating:focus-within {
+form .form-floating:focus-within {
     z-index: 2;
 }
 
-.form-signin input[type="email"],
-.form-signin input[type="password"] {
+form input[type="email"],
+form input[type="password"] {
     margin-bottom: 20px;
     border-radius: 6px;
     border: 1px solid #ced4da;
@@ -46,7 +51,7 @@ form {
     width: 100%;
 }
 
-.form-signin button {
+form button {
     padding: 15px 20px;
     background-color: #007bff;
     color: #fff;
@@ -56,50 +61,8 @@ form {
     width: 100%;
 }
 
-.form-signin button:hover {
+form button:hover {
     background-color: #0056b3;
-}
-
-.inline {
-    display: inline;
-}
-
-.like-a-link {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.like-a-link:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.signup-link {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.logo-container {
-    margin-bottom: 20px;
-}
-
-.logo-container img {
-    max-width: 100%; 
-}
-
-.forgot-password {
-    text-align: right;
- 
-    margin-bottom: 20px;
-}
-
-.forgot-password a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.forgot-password a:hover {
-    text-decoration: underline;
 }
 
 @media (min-width: 768px) {
@@ -108,7 +71,7 @@ form {
         justify-content: space-around;
     }
 
-    .form-signin {
+    form {
         margin-top: 0;
     }
 }
