@@ -14,6 +14,12 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+//   helloWorld(): Observable<Response> {
+//     let postBody = {
+        
+//     }
+//   }
+
   getWeather(zip: number): Observable<Response> {
     let postBody = {
       "table": "apidata",
