@@ -24,6 +24,7 @@ export class DataService {
             console.log(res)))
     }
 
+
     getDOW(date: string) {
         //date in format "2024-02-20 6:08"
         const days = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun']
