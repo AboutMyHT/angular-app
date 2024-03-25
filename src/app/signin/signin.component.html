@@ -1,4 +1,22 @@
-<div class="container">
+<div *ngIf="alertMessage"
+    class="alert alert-{{ alertType }} d-flex align-items-center alert-dismissible alert-message fade show"
+    role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+        <use xlink:href="#exclamation-triangle-fill" />
+    </svg>
+    <div>
+        {{ alertMessage }}
+        <a *ngIf="alertPreferForm" class="like-a-link" (click)="swapForm(alertPreferForm); dismissAlert()">
+            {{ alertPreferText }}
+        </a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+            (click)="dismissAlert()"></button>
+    </div>
+</div>
+
+
+<div class=" container">
+
     <div class="logo-container">
         <img src="../../assets/amh.gif" alt="Logo" class="logo">
     </div>
@@ -7,18 +25,18 @@
         <h2 id="actionText">Sign In</h2>
 
         <form [formGroup]="signInForm" (ngSubmit)="signIn()">
-            <label for="email" class="control-label required">Email address</label>
             <div class="form-floating">
                 <input type="email" formControlName="email" class="form-control" id="email">
+                <label for="email" class="control-label required">Email address</label>
             </div>
             <div *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched"
                 class="alert alert-danger">
                 Invalid email address
             </div>
 
-            <label for="password" class="control-label required">Password</label>
             <div class="form-floating">
                 <input type="password" formControlName="password" class="form-control" id="password">
+                <label for="password" class="control-label required">Password</label>
             </div>
             <div *ngIf="signInForm.get('password')?.invalid && signInForm.get('password')?.touched"
                 class="alert alert-danger">
@@ -40,56 +58,57 @@
         <h2 id="actionText">Sign Up</h2>
 
         <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
-            <label for="firstName" class="control-label">First Name</label>
             <div class="form-floating">
                 <input type="text" formControlName="firstName" class="form-control" id="firstName"
                     placeholder="First Name">
+                <label for="firstName" class="control-label">First Name</label>
             </div>
 
-            <label for="lastName" class="control-label">Last Name</label>
             <div class="form-floating">
                 <input type="text" formControlName="lastName" class="form-control" id="lastName"
                     placeholder="Last Name">
+                <label for="lastName" class="control-label">Last Name</label>
             </div>
 
-            <label for="email" class="control-label required">Email address</label>
             <div class="form-floating">
                 <input type="email" formControlName="email" class="form-control" id="email" placeholder="Email">
+                <label for="email" class="control-label required">Email address</label>
             </div>
             <div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched"
                 class="alert alert-danger">
                 Invalid email address
             </div>
 
-            <label for="password" class="control-label required">Password</label>
             <div class="form-floating">
                 <input type="password" formControlName="password" class="form-control" id="password"
                     placeholder="Password">
+                <label for="password" class="control-label required">Password</label>
             </div>
             <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched"
                 class="alert alert-danger">
                 Invalid password
             </div>
 
-            <label for="confirmPassword" class="control-label required">Confirm Password</label>
             <div class="form-floating">
-                <input type="password" formControlName="confirmPassword" class="form-control" id="confirmPassword">
+                <input type="password" formControlName="confirmPassword" class="form-control" id="confirmPassword"
+                    placeholder="Confirm Password">
+                <label for="confirmPassword" class="control-label required">Confirm Password</label>
             </div>
             <div *ngIf="signUpForm.invalid && signUpForm.hasError('noMatch') && signUpForm.get('password')?.touched"
                 class="alert alert-danger">
                 Passwords do not match
             </div>
 
-            <label for="zipCode" class="control-label required" s>Zip Code</label>
             <div class="form-floating">
                 <input type="text" formControlName="zipCode" class="form-control" id="zipCode" placeholder="Zip Code">
+                <label for="zipCode" class="control-label required">Zip Code</label>
             </div>
             <div *ngIf="signUpForm.get('zipCode')?.invalid && signUpForm.get('zipCode')?.touched"
                 class="alert alert-danger">
                 Invalid zip code
             </div>
 
-            <button type="submit" class="btn btn-primary">Sign up</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!signUpForm.valid">Sign up</button>
         </form>
 
         <div class="signin-link" style="display: inline;">

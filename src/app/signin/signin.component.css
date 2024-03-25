@@ -1,9 +1,11 @@
-/* html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-} */
+.alert-message {
+    position: fixed;
+    min-width: auto;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+}
 
 .container {
     max-width: 800px;
@@ -29,7 +31,7 @@
 }
 
 .form-floating {
-    position: relative;
+    /* position: relative; */
     margin-bottom: 10px;
 }
 
@@ -42,12 +44,11 @@ form .form-floating:focus-within {
     z-index: 2;
 }
 
-form input[type="email"],
-form input[type="password"] {
+form input {
     margin-bottom: 20px;
-    border-radius: 6px;
     border: 1px solid #ced4da;
-    padding: 10px;
+    padding: 0px;
+    padding-left: 10px;
     width: 100%;
 }
 

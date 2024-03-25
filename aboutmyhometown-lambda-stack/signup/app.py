@@ -72,20 +72,17 @@ def lambda_handler(event, context):
 
             if user_in_db:
                 # Return the user information
+                logger.info("User created successfully.")
                 return api_response(
                     {
-                        "user": {
-                            "email": user_in_db.email,
-                            "first_name": user_in_db.first_name,
-                            "last_name": user_in_db.last_name,
-                            "zip_code": user_in_db.zip_code,
-                        },
+                        "user": user_in_db.as_dict(),
                     },
                     200,
                 )
     except ValueError as error:
+        logger.info(f"Error: {error}")
         return api_response(
-            str(error),
+            "User exists",
             400,
         )
 
