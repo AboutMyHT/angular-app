@@ -30,6 +30,8 @@ export class UserService {
         ).subscribe({
           error: (error) => {
             console.error("Failed to fetch current user", error);
+            localStorage.removeItem('sessionToken');
+            window.location.reload();
             resolve(null);
           },
           next: (user) => {
