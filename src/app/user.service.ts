@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from './user'
@@ -10,9 +10,40 @@ import { User } from './user'
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private http: HttpClient) { }
+  currentUser: User | null = null;
 
-  signupUser(
+  constructor(private http: HttpClient) {
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('sessionToken') !== null;
+  }
+
+  initializeUser(): Promise<User | null> {
+    return new Promise((resolve, reject) => {
+      if (this.isLoggedIn()) {
+        const endpoint: string = environment.apiUrl + "/session";
+        this.http.post<{ user: User }>(endpoint, {
+          session_token: localStorage.getItem('sessionToken')
+        }).pipe(
+          map(response => response.user)
+        ).subscribe({
+          error: (error) => {
+            console.error("Failed to fetch current user", error);
+            resolve(null);
+          },
+          next: (user) => {
+            this.currentUser = user;
+            resolve(user);
+          }
+        });
+      } else {
+        resolve(null);
+      }
+    })
+  }
+
+  async signupUser(
     email: string,
     zipCode: string,
     password: string,
@@ -20,33 +51,58 @@ export class UserService {
     lastName: string = "",
     emailVerified: boolean = false,
     needsPasswordReset: boolean = false,
-  ): Observable<User> {
+    successCallback: Function = () => { },
+    failureCallback: Function = () => { },
+  ): Promise<boolean> {
     const endpoint: string = environment.apiUrl + "/signup";
 
-    return this.http.post<{ user: User }>(endpoint, {
-      email: email,
-      zip_code: zipCode,
-      password: password,
-      first_name: firstName,
-      last_name: lastName,
-      email_verified: emailVerified,
-      needs_password_reset: needsPasswordReset
-    }).pipe(
-      map(response => response.user)
-    );
+    try {
+      const user = await firstValueFrom(this.http.post<{ user: User }>(endpoint, {
+        email: email,
+        zip_code: zipCode,
+        password: password,
+        first_name: firstName,
+        last_name: lastName,
+        email_verified: emailVerified,
+        needs_password_reset: needsPasswordReset
+      }).pipe(
+        map(response => response.user)
+      ));
+
+      successCallback(user);
+
+      return true;
+    } catch (error) {
+      failureCallback(error);
+      return false;
+    }
   }
 
-  signinUser(
+  async signinUser(
     email: string,
-    password: string
-  ): Observable<User> {
+    password: string,
+    successCallback: Function = () => { },
+    failureCallback: Function = () => { },
+  ): Promise<boolean> {
     const endpoint: string = environment.apiUrl + "/signin";
 
-    return this.http.post<{ user: User }>(endpoint, {
-      email: email,
-      password: password,
-    }).pipe(
-      map(response => response.user)
-    );
+    try {
+      const response = await firstValueFrom(this.http.post<{ user: User, session_token: string }>(endpoint, {
+        email: email,
+        password: password,
+      }));
+
+      const user = response.user;
+      const sessionToken = response.session_token;
+
+      localStorage.setItem('sessionToken', sessionToken);
+
+      successCallback(user);
+
+      return true;
+    } catch (error) {
+      failureCallback(error);
+      return false;
+    }
   }
 }

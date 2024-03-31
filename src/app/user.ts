@@ -12,6 +12,10 @@ export class User {
         return new User(data.email, data.zip_code, data.first_name, data.last_name, data.email_verified, data.needs_password_reset);
     }
 
+    public fiveDigitZip(): number {
+        return Number(this.zipCode.slice(0, 5));
+    }
+
     public displayName(): string {
         if (this.firstName) {
             return `${this.firstName} <${this.email}>`;
