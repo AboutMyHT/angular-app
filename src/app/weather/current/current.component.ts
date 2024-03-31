@@ -8,7 +8,7 @@ import { Response } from 'src/app/response';
 
 interface SimpleChanges {
   __index(zip: number): SimpleChanges
-  }
+}
 
 
 @Component({
@@ -18,23 +18,22 @@ interface SimpleChanges {
 })
 export class CurrentComponent implements OnInit {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  @Input() zip: number = 0;
+  @Input() zipCode: number = 0;
   data = new DataService(this.http);
   weather: WeatherData | null = null;
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(`the passed in zip is ${this.zip}`)
-    this.data.getWeather(this.zip).subscribe(res => {
+    this.data.getWeather(this.zipCode).subscribe(res => {
       var response: Response = <Response>res;
       this.weather = <WeatherData>(JSON.parse(response.body.Item.data))
     });
   }
 
-  
+
 
   getTemp(units: string) {
     if (units == 'c') {

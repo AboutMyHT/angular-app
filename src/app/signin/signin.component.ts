@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, Valid
 import { User } from '../user';
 
 import { UserService } from '../user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signin',
@@ -14,7 +15,10 @@ import { UserService } from '../user.service';
 })
 
 export class SigninComponent {
-  constructor(private userService: UserService, private router: Router) { }
+  isLoggedIn: boolean;
+  constructor(private userService: UserService, private router: Router) {
+    this.isLoggedIn = this.userService.isLoggedIn();
+  }
 
   alertMessage: string = '';
   alertType: string = '';
@@ -45,23 +49,16 @@ export class SigninComponent {
     if (!this.signInForm.invalid) {
       this.userService.signinUser(
         this.signInForm.get('email')?.value!,
-        this.signInForm.get('password')?.value!
-      ).subscribe(
-        {
-          error: (error) => {
-            if (error.error == "Invalid email or password") {
-              this.showAlert("Invalid email or password! Please try again.", "danger");
-            } else {
-              this.showAlert(error.error, "danger");
-            }
-          },
-          next: (userData) => {
-            const user = User.fromObject(userData);
-            this.showAlert("Succesful login for '" + user.toString() + "', however logging in is not implemented yet.", "success");
-            this.resetForms();
-          },
-          complete: () => {
-            this.swapForm('signin-form');
+        this.signInForm.get('password')?.value!,
+        (userData: User) => { // Success callback
+          this.router.navigate(['/']);
+          window.location.reload();
+        },
+        (error: HttpErrorResponse) => { // Failure callback
+          if (error.error == "Invalid email or password") {
+            this.showAlert("Invalid email or password! Please try again.", "danger");
+          } else {
+            this.showAlert(error.error, "danger");
           }
         }
       );
@@ -76,23 +73,19 @@ export class SigninComponent {
         this.signUpForm.get('password')?.value!,
         this.signUpForm.get('firstName')?.value || '',
         this.signUpForm.get('lastName')?.value || '',
-      ).subscribe(
-        {
-          error: (error) => {
-            if (error.error == "User exists") {
-              this.showAlert("That email address is already in use.", "danger", "signin-form", "Sign in instead.");
-            } else {
-              this.showAlert(error.error, "danger");
-            }
-          },
-          next: (user) => {
-            this.resetForms();
-          },
-          complete: () => {
-            this.showAlert("Account created successfully! Please sign in.", "success");
-            this.swapForm('signin-form');
+        false, false,
+        () => {// Success callback
+          this.resetForms();
+          this.showAlert("Account created successfully! Please sign in.", "success");
+          this.swapForm('signin-form');
+        },
+        (error: HttpErrorResponse) => {// Failure callback
+          if (error.error == "User exists") {
+            this.showAlert("That email address is already in use.", "danger", "signin-form", "Sign in instead.");
+          } else {
+            this.showAlert(error.error, "danger");
           }
-        }
+        },
       );
     }
   }

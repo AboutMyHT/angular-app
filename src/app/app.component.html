@@ -17,12 +17,22 @@
                     </li>
                 </ul>
                 <hr />
-                <a class="btn btn-outline-light d-lg-none" routerLink="/signin" routerLinkActive="active"
-                    ariaCurrentWhenActive="page">Sign In</a>
-            </div>
-            <a class="btn btn-outline-light d-none d-lg-block" routerLink="/signin" routerLinkActive="active"
-                ariaCurrentWhenActive="page">Sign In</a>
+                <a *ngIf="!isLoggedIn" class="btn btn-outline-light d-lg-none" routerLink="/signin"
+                    routerLinkActive="active" ariaCurrentWhenActive="page">Sign In</a>
 
+                <div *ngIf="isLoggedIn" class="d-flex align-items-center d-lg-none">
+                    <span class="user-email me-2 text-white" routerLink="/profile">{{ currentUser.displayName()
+                        }}</span>
+                    <a class="btn btn-outline-light" (click)="signout()">Sign Out</a>
+                </div>
+            </div>
+            <a *ngIf="!isLoggedIn" class="btn btn-outline-light d-none d-lg-block" routerLink="/signin"
+                routerLinkActive="active" ariaCurrentWhenActive="page">Sign In</a>
+
+            <div *ngIf="isLoggedIn" class="d-flex align-items-center d-none d-lg-block">
+                <span class="user-email me-2 text-white" routerLink="/profile">{{ currentUser.displayName() }}</span>
+                <a class="btn btn-outline-light" (click)="signout()">Sign Out</a>
+            </div>
         </div>
     </nav>
 </header>

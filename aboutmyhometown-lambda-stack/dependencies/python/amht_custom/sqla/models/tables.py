@@ -1,7 +1,7 @@
 import re
 
-from sqlalchemy.orm import validates
-from sqlalchemy import Column, String, Boolean
+from sqlalchemy.orm import validates, relationship
+from sqlalchemy import Column, String, Boolean, DateTime, ForeignKey
 
 from amht_custom.sqla.models.base import Base
 
@@ -47,4 +47,22 @@ class User(Base):
             "zip_code": self.zip_code,
             "email_verified": self.email_verified,
             "needs_password_reset": self.needs_password_reset,
+        }
+
+
+class UserSession(Base):
+    __tablename__ = "user_session"
+
+    # Required fields
+    email = Column(String(45), ForeignKey("users.email"), nullable=False)
+    session_token = Column(String(256), primary_key=True)
+    last_used = Column(DateTime, nullable=False)
+
+    user = relationship("User", backref="user_session")
+
+    def as_dict(self):
+        return {
+            "email": self.email,
+            "session_token": self.session_token,
+            "last_used": self.last_used,
         }

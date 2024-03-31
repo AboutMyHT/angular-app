@@ -7,6 +7,9 @@ from amht_custom.db_utils.users import (
     get_user,
     check_password,
 )
+from amht_custom.db_utils.sessions import (
+    generate_session_token,
+)
 
 
 logger = logging.getLogger()
@@ -56,9 +59,12 @@ def lambda_handler(event, context):
             if is_valid_password:
                 user_in_db = get_user(session, post_body["email"])
 
+                new_session_token = generate_session_token(session, post_body["email"])
+
                 return api_response(
                     {
                         "user": user_in_db.as_dict(),
+                        "session_token": str(new_session_token),
                     },
                     200,
                 )

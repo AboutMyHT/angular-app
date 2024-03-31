@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { APP_INITIALIZER } from '@angular/core';
 
+import { UserService } from './user.service';
 
 import { AppComponent } from './app.component';
 import { WidgetComponent } from './widget/widget.component';
@@ -28,7 +30,12 @@ import { CurrentComponent } from './weather/current/current.component';
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: (userService: UserService) => () => userService.initializeUser(),
+    deps: [UserService],
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
