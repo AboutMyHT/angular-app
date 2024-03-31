@@ -33,7 +33,7 @@ export class UserService {
             resolve(null);
           },
           next: (user) => {
-            this.currentUser = user;
+            this.currentUser = User.fromObject(user);
             resolve(user);
           }
         });

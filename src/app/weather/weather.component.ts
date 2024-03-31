@@ -8,7 +8,7 @@ import { CurrentComponent } from './current/current.component';
 })
 export class WeatherComponent {
 
-  @Input() zip: number = 0;
+  @Input() zipCode: number = 0;
 
 
 }

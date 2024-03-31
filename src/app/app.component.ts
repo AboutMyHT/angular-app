@@ -10,12 +10,12 @@ import { User } from './user';
 })
 export class AppComponent {
   isLoggedIn: boolean;
-  user: User;
+  currentUser: User;
 
   constructor(userService: UserService) {
     this.isLoggedIn = userService.isLoggedIn();
 
-    this.user = userService.currentUser!;
+    this.currentUser = userService.currentUser!;
   }
 
   signout() {

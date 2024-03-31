@@ -2,11 +2,11 @@
   <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
       <h1 class="fw-light">Example Page</h1>
-      <p class="">Zip code: {{zip}}</p>
+      <p class="">Zip code: {{zipCode}}</p>
       <input id="zipCode" class="text-center" type="number" maxLength="5" minlength="5" placeholder="zip code">
       <p>
-        <a class="btn btn-primary m-2" (click)="updateZip($event)">Update
-          Zip Code</a>
+        <a class="btn btn-primary m-2" (click)="updateZip($event)">Set New Zip Code</a>
+        <a class="btn btn-secondary m-2" (click)="resetZip($event)">Reset Zip Code</a>
       </p>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <div class="col">
-        <app-current [zip]='zip'></app-current>
+        <app-current [zipCode]='zipCode'></app-current>
       </div>
       <div class="col">
         <app-card [title]="'Card'" [subtitle]="'This is a card!'"

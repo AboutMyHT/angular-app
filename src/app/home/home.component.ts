@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UserService } from '../user.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  zipCode: number;
 
-  // cardtitle = "Litchfield, IL.";
-  // cardsubtitle = "Current Weather";
-  zip = 62701;
+  constructor(private userService: UserService) {
+    this.zipCode = this.userService.currentUser?.fiveDigitZip()!;
+  }
+
   ngOnInit() {
 
   }
@@ -17,7 +21,12 @@ export class HomeComponent implements OnInit {
   updateZip(event: Event) {
     event.preventDefault();
     let inputElm = document.getElementById("zipCode") as HTMLInputElement
-    this.zip = parseInt(inputElm!.value)
+    this.zipCode = parseInt(inputElm!.value)
+  }
+
+  resetZip(event: Event) {
+    event.preventDefault();
+    this.zipCode = this.userService.currentUser?.fiveDigitZip()!;
   }
 
 }
