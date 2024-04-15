@@ -35,10 +35,6 @@ Parameters:
     AllowedValues:
       - development
       - production
-  CORSOrigin:
-    Type: String
-    Description: "CORS Origin"
-    Default: "*"
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -66,7 +62,7 @@ Globals:
       AllowCredentials: False
       AllowHeaders: "'*'"
       AllowMethods: "'POST, OPTIONS'"
-      AllowOrigin: !Sub "'${CORSOrigin}'"
+      AllowOrigin: !Sub "'*'"
 
 # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
