@@ -1,7 +1,6 @@
-
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors, FormGroupName } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 import { User } from '../user';
 
@@ -13,7 +12,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-
 export class SigninComponent {
   isLoggedIn: boolean;
   constructor(private userService: UserService, private router: Router) {

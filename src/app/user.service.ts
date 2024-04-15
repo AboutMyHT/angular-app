@@ -15,6 +15,10 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('sessionToken');
+  }
+
   isLoggedIn(): boolean {
     return localStorage.getItem('sessionToken') !== null;
   }
@@ -43,6 +47,35 @@ export class UserService {
         resolve(null);
       }
     })
+  }
+
+  async updateUser(
+    sessionToken: string,
+    zipCode: string,
+    firstName: string = "",
+    lastName: string = "",
+    successCallback: Function = () => { },
+    failureCallback: Function = () => { },
+  ): Promise<boolean> {
+    const endpoint: string = environment.apiUrl + "/updateuser";
+
+    try {
+      const user = await firstValueFrom(this.http.post<{ user: User }>(endpoint, {
+        session_token: sessionToken,
+        zip_code: zipCode,
+        first_name: firstName,
+        last_name: lastName,
+      }).pipe(
+        map(response => response.user)
+      ));
+
+      successCallback(user);
+
+      return true;
+    } catch (error) {
+      failureCallback(error);
+      return false;
+    }
   }
 
   async signupUser(
