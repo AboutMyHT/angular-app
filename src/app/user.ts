@@ -18,7 +18,7 @@ export class User {
 
     public displayName(): string {
         if (this.firstName) {
-            return `${this.firstName} <${this.email}>`;
+            return `${this.firstName} ${this.lastName}`;
         }
         return this.email;
     }

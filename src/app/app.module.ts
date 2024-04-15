@@ -11,6 +11,7 @@ import { WidgetComponent } from './widget/widget.component';
 import { CardComponent } from './card/card.component';
 import { WeatherComponent } from './weather/weather.component';
 import { SigninComponent } from './signin/signin.component';
+import { ProfileComponent } from './profile/profile.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CurrentComponent } from './weather/current/current.component';
@@ -24,6 +25,7 @@ import { CurrentComponent } from './weather/current/current.component';
     CardComponent,
     WeatherComponent,
     SigninComponent,
+    ProfileComponent,
     HomeComponent,
     CurrentComponent
   ],

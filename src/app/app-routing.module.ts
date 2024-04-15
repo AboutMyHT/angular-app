@@ -6,16 +6,20 @@ import { authGuard } from './auth.guard';
 import { guestGuard } from './guest.guard';
 
 import { SigninComponent } from './signin/signin.component';
+import { AboutComponent } from './about/about.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { WeatherComponent } from './weather/weather.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  { path: 'about', component: AboutComponent },
   { path: 'signin', component: SigninComponent, canActivate: [guestGuard] },
   { path: '**', component: PageNotFoundComponent }
 ]
