@@ -1,7 +1,6 @@
-
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors, FormGroupName } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 import { User } from '../user';
 
@@ -13,12 +12,13 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-
 export class SigninComponent {
   isLoggedIn: boolean;
   constructor(private userService: UserService, private router: Router) {
     this.isLoggedIn = this.userService.isLoggedIn();
   }
+
+  isLoading: boolean = false;
 
   alertMessage: string = '';
   alertType: string = '';
@@ -47,14 +47,17 @@ export class SigninComponent {
 
   signIn(): void {
     if (!this.signInForm.invalid) {
+      this.startLoading();
       this.userService.signinUser(
         this.signInForm.get('email')?.value!,
         this.signInForm.get('password')?.value!,
         (userData: User) => { // Success callback
+          this.stopLoading();
           this.router.navigate(['/']);
           window.location.reload();
         },
         (error: HttpErrorResponse) => { // Failure callback
+          this.stopLoading();
           if (error.error == "Invalid email or password") {
             this.showAlert("Invalid email or password! Please try again.", "danger");
           } else {
@@ -67,6 +70,7 @@ export class SigninComponent {
 
   signUp(): void {
     if (!this.signUpForm.invalid) {
+      this.startLoading();
       this.userService.signupUser(
         this.signUpForm.get('email')?.value!,
         this.signUpForm.get('zipCode')?.value!,
@@ -75,11 +79,13 @@ export class SigninComponent {
         this.signUpForm.get('lastName')?.value || '',
         false, false,
         () => {// Success callback
+          this.stopLoading();
           this.resetForms();
           this.showAlert("Account created successfully! Please sign in.", "success");
           this.swapForm('signin-form');
         },
         (error: HttpErrorResponse) => {// Failure callback
+          this.stopLoading();
           if (error.error == "User exists") {
             this.showAlert("That email address is already in use.", "danger", "signin-form", "Sign in instead.");
           } else {
@@ -106,8 +112,18 @@ export class SigninComponent {
   }
 
   resetForms(): void {
+    this.isLoading = false;
+
     this.signInForm.reset();
     this.signUpForm.reset();
+  }
+
+  startLoading(): void {
+    this.isLoading = true;
+  }
+
+  stopLoading(): void {
+    this.isLoading = false;
   }
 
   swapForm(id: string): void {

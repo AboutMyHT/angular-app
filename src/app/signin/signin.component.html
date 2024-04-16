@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div class=" container">
+<div class="container">
 
     <div class="logo-container">
         <img src="../../assets/amh.gif" alt="Logo" class="logo">
@@ -42,7 +42,12 @@
                 Invalid password
             </div>
 
-            <button type="submit" class="btn btn-primary" [disabled]="!signInForm.valid">Sign in</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!signInForm.valid || isLoading">
+                <div *ngIf="isLoading" class="spinner-border" role="status">
+                </div>
+
+                <span *ngIf="!isLoading">Sign in</span>
+            </button>
         </form>
 
         <div class="signup-link" style="display: inline;">
@@ -107,7 +112,12 @@
                 Invalid zip code
             </div>
 
-            <button type="submit" class="btn btn-primary" [disabled]="!signUpForm.valid">Sign up</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!signUpForm.valid || isLoading">
+                <div *ngIf="isLoading" class="spinner-border" role="status">
+                </div>
+
+                <span *ngIf="!isLoading">Sign up</span>
+            </button>
         </form>
 
         <div class="signin-link" style="display: inline;">

@@ -35,10 +35,6 @@ Parameters:
     AllowedValues:
       - development
       - production
-  CORSOrigin:
-    Type: String
-    Description: "CORS Origin"
-    Default: "*"
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -66,7 +62,7 @@ Globals:
       AllowCredentials: False
       AllowHeaders: "'*'"
       AllowMethods: "'POST, OPTIONS'"
-      AllowOrigin: !Sub "'${CORSOrigin}'"
+      AllowOrigin: !Sub "'*'"
 
 # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -121,6 +117,28 @@ Resources:
               - rds-db:connect
             Resource:
               - !Sub "arn:aws:rds-db:${AWS::Region}:${AWS::AccountId}:dbuser:${DBResourceId}/${DBUsername}"
+
+  UpdateUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: updateuser/
+      Architectures:
+        - x86_64
+      Events:
+        UpdateUser:
+          Type: Api
+          Properties:
+            Path: /updateuser
+            Method: post
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            Effect: Allow
+            Action:
+              - rds-db:connect
+            Resource:
+              - !Sub "arn:aws:rds-db:${AWS::Region}:${AWS::AccountId}:dbuser:${DBResourceId}/${DBUsername}"
+
   SessionFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -165,6 +183,16 @@ Outputs:
   SigninFunctionIamRole:
     Description: "Implicit IAM Role created for Signin function"
     Value: !GetAtt SigninFunctionRole.Arn
+  
+  UpdateUserApi:
+    Description: "API Gateway endpoint URL for Prod stage for UpdateUser function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/updateuser/"
+  UpdateUserFunction:
+    Description: "UpdateUser Lambda Function ARN"
+    Value: !GetAtt UpdateUserFunction.Arn
+  UpdateUserFunctionIamRole:
+    Description: "Implicit IAM Role created for UpdateUser function"
+    Value: !GetAtt UpdateUserFunctionRole.Arn
 
   SessionApi:
     Description: "API Gateway endpoint URL for Prod stage for Session function"
