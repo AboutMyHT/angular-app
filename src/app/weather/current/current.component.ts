@@ -5,6 +5,7 @@ import { WeatherData } from 'src/app/weather-data';
 import { HttpClient } from '@angular/common/http';
 import { responseBody } from 'src/app/responsebody';
 import { Response } from 'src/app/response';
+import { CityData } from 'src/app/city-data'
 
 interface SimpleChanges {
   __index(zip: number): SimpleChanges
@@ -23,16 +24,22 @@ export class CurrentComponent implements OnInit {
   @Input() zipCode: number = 0;
   data = new DataService(this.http);
   weather: WeatherData | null = null;
+  cityData: CityData | null = null;
+
+  
 
   ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.data.getWeather(this.zipCode).subscribe(res => {
       var response: Response = <Response>res;
-      this.weather = <WeatherData>(JSON.parse(response.body.Item.data))
+      this.weather = <WeatherData>(JSON.parse(response.body.Item.data));
+    });
+    this.data.getCity(this.zipCode).subscribe(res => {
+      var response: Response = <Response>res;
+      this.cityData = <CityData>(JSON.parse(response.body.Item.data));
     });
   }
-
 
 
   getTemp(units: string) {

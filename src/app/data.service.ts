@@ -30,8 +30,7 @@ export class DataService {
             "type": "city",
             "zip": zip
         }
-        return this.http.post<Response>(this.lambdaURL, postBody).pipe(tap(res =>
-            console.log(res)))
+        return this.http.post<Response>(this.lambdaURL, postBody);
     }
 
 
