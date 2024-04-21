@@ -7,6 +7,7 @@
       <p>
         <a class="btn btn-primary m-2" (click)="updateZip($event)">Set New Zip Code</a>
         <a class="btn btn-secondary m-2" (click)="resetZip($event)">Reset Zip Code</a>
+        <a class="btn btn-secondary m-2" (click)="getLocation($event)">Use My Current Location</a>
       </p>
     </div>
   </div>
@@ -17,33 +18,7 @@
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <div class="col">
-        <app-current [zipCode]='zipCode'></app-current>
-      </div>
-      <div class="col">
-        <app-card [title]="'Card'" [subtitle]="'This is a card!'"
-          [body]="'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'"
-          [btnPrimaryLink]="'#'" [btnPrimaryText]="'Click me!'"></app-card>
-      </div>
-      <div class="col">
-        <app-card [title]="'Card'" [subtitle]="'This is a card!'"
-          [body]="'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'"
-          [btnPrimaryLink]="'#'" [btnPrimaryText]="'Click me!'"></app-card>
-      </div>
-
-      <div class="col">
-        <app-card [title]="'Card'" [subtitle]="'This is a card!'"
-          [body]="'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'"
-          [btnPrimaryLink]="'#'" [btnPrimaryText]="'Click me!'"></app-card>
-      </div>
-      <div class="col">
-        <app-card [title]="'Card'" [subtitle]="'This is a card!'"
-          [body]="'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'"
-          [btnPrimaryLink]="'#'" [btnPrimaryText]="'Click me!'"></app-card>
-      </div>
-      <div class="col">
-        <app-card [title]="'Card'" [subtitle]="'This is a card!'"
-          [body]="'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'"
-          [btnPrimaryLink]="'#'" [btnPrimaryText]="'Click me!'"></app-card>
+        <a href="/forecast"><app-current [zipCode]='zipCode'></app-current></a>
       </div>
     </div>
   </div>

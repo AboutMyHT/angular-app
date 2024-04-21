@@ -1,0 +1,67 @@
+<button type="button" (click)="viewData()">view</button>
+<section *ngIf="weather" class="vh-100" style="background-color: white;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100" style="color: #FEFEFE;">
+            <div class="col-md-9 col-lg-7 col-xl-5">
+                <div class="widget">
+                    <!-- First Widget - Current Weather -->
+                    <div class="card mb-4 gradient-custom">
+                        <div class="card-body">
+                            <!-- Current temperature -->
+                            <h1>{{weather.location.name}}, {{weather.location.region}}</h1>
+                            <h2>Current Conditions:</h2>
+                            <h2>Temperature: {{weather.current.temp_f}} &deg; F &nbsp;&nbsp;
+                                <img src="{{weather.current.condition.icon}}" alt="Current Weather Icon">
+                                💨{{weather!.current.wind_mph}}mph {{weather!.current.wind_dir}}
+                                <img src="../../../assets/humidity.png"
+                                    style="margin-top: -5px; width: 12px; height: 15px; display: inline;">
+                                {{weather!.current.humidity}}%
+                            </h2>
+                            <!-- Current weather condition icon -->
+                            <!-- <img src="{{weather.current.condition.icon}}" alt="Current Weather Icon"> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Third Widget - 3-Day Forecast -->
+                <div class="widget">
+                    <div class="card mb-4 gradient-custom">
+                        <div class="card-body">
+                            <h2>3-Day Forecast</h2>
+                            <br>
+                            <!-- Loop over the 3 days forecast -->
+                            <div *ngFor="let eachDay of weather.forecast.forecastday">
+                                <h2>{{eachDay.date}}</h2>
+                                
+                                <p>Max Temp: {{eachDay.day.maxtemp_f}} &deg; F, Min Temp: {{eachDay.day.mintemp_f}} &deg; F &nbsp;&nbsp;
+                                    {{eachDay.day.condition.text}}&nbsp;&nbsp;
+                                    <img src="{{getIcon(eachDay.day.condition.icon)}}" alt="Daily Weather Icon"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Widget - Hourly Forecast -->
+                <div class="widget">
+                    <div class="card mb-4 gradient-custom">
+                        <div class="card-body">
+                            <h2>Hourly Forecast</h2>
+                            <br>
+                            <!-- Loop over the 3 days forecast -->
+                            <div *ngFor="let eachDay of weather.forecast.forecastday">
+                                <h2>{{eachDay.date}}</h2>
+                                <!-- Loop over the 24 hours -->
+                                <div *ngFor="let eachHour of eachDay.hour">
+                                    <p class="center">
+                                        {{eachHour.time.slice(11)}}: &nbsp;&nbsp;&nbsp; Temp {{eachHour.temp_f}} &deg; F
+                                        <img src="{{getIcon(eachHour.condition.icon)}}" alt="Hourly Weather Icon">
+                                        {{eachHour.condition.text}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

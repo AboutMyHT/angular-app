@@ -12,15 +12,17 @@ import { HomeComponent } from './home/home.component';
 import { WeatherComponent } from './weather/weather.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ForecastComponent } from './weather/forecast/forecast.component';
 
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'about', component: AboutComponent },
   { path: 'signin', component: SigninComponent, canActivate: [guestGuard] },
+  { path: 'forecast', component: ForecastComponent, canActivate: [authGuard] },
   { path: '**', component: PageNotFoundComponent }
 ]
 

@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 import { WeatherData } from 'src/app/weather-data';
 import { HttpClient } from '@angular/common/http';
-import { responseBody } from 'src/app/responsebody';
 import { Response } from 'src/app/response';
 import { CityData } from 'src/app/city-data'
+import { Globals } from 'src/app/globals.service';
 
 interface SimpleChanges {
   __index(zip: number): SimpleChanges
@@ -34,10 +33,6 @@ export class CurrentComponent implements OnInit {
     this.data.getWeather(this.zipCode).subscribe(res => {
       var response: Response = <Response>res;
       this.weather = <WeatherData>(JSON.parse(response.body.Item.data));
-    });
-    this.data.getCity(this.zipCode).subscribe(res => {
-      var response: Response = <Response>res;
-      this.cityData = <CityData>(JSON.parse(response.body.Item.data));
     });
   }
 
