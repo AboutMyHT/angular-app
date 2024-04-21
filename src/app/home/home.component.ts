@@ -15,11 +15,7 @@ export class HomeComponent implements OnInit {
   public lng = "";
 
   constructor(private userService: UserService, private http: HttpClient, public globals: Globals) {
-    if (globals.zipCode) {
-      this.zipCode = globals.zipCode;
-    } else {
       this.zipCode = this.userService.currentUser?.fiveDigitZip()!;
-    }
   }
 
   ngOnInit() {

@@ -1,4 +1,3 @@
-<button type="button" (click)="viewData()">view</button>
 <section *ngIf="weather" class="vh-100" style="background-color: white;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100" style="color: #FEFEFE;">
@@ -13,9 +12,7 @@
                             <h2>Temperature: {{weather.current.temp_f}} &deg; F &nbsp;&nbsp;
                                 <img src="{{weather.current.condition.icon}}" alt="Current Weather Icon">
                                 💨{{weather!.current.wind_mph}}mph {{weather!.current.wind_dir}}
-                                <img src="../../../assets/humidity.png"
-                                    style="margin-top: -5px; width: 12px; height: 15px; display: inline;">
-                                {{weather!.current.humidity}}%
+                                Humidity {{weather!.current.humidity}}%
                             </h2>
                             <!-- Current weather condition icon -->
                             <!-- <img src="{{weather.current.condition.icon}}" alt="Current Weather Icon"> -->

@@ -16,8 +16,8 @@ export class ForecastComponent implements OnInit {
   weather: WeatherData | null = null;
 
   constructor(private userService: UserService, private data: DataService) {
-    this.zipCode = 90210;
-   }
+    this.zipCode = this.userService.currentUser?.fiveDigitZip()!;
+  }
 
 
   ngOnInit(): void {
@@ -26,10 +26,6 @@ export class ForecastComponent implements OnInit {
       this.weather = <WeatherData>(JSON.parse(response.body.Item.data));
       console.log(this.weather);
     });
-  }
-
-  viewData() {
-    console.log(this.weather);
   }
 
   getIcon(url: string) {
