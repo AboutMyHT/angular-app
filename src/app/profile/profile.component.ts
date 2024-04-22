@@ -29,6 +29,7 @@ export class ProfileComponent {
   }
 
   isLoading: boolean = false;
+  editMode: boolean = false;
 
   alertMessage: string = '';
   alertType: string = '';
@@ -103,6 +104,10 @@ export class ProfileComponent {
     this.alertType = '';
     this.alertPreferForm = '';
     this.alertPreferText = '';
+  }
+
+  makeEditable(fieldToEdit: string): void {
+    this.updateUserForm.get(fieldToEdit)?.enable();
   }
 
   ngOnInit(): void {

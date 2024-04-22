@@ -1,18 +1,3 @@
-<!-- <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">{{ currentUser.displayName() }}</h1>
-            <p class="lead text-muted">
-                <b>Email:</b> {{ currentUser.email }}
-            </p>
-            <p class="lead text-muted">
-                <b>Zip Code:</b> {{ currentUser.zipCode }}
-            </p>
-
-        </div>
-    </div>
-</section> -->
-
 <div *ngIf="alertMessage"
     class="alert alert-{{ alertType }} d-flex align-items-center alert-dismissible alert-message fade show"
     role="alert">
@@ -34,41 +19,63 @@
         <h2 id="actionText">Welcome, {{ currentUser.displayName() }}</h2>
 
         <form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
-            <div class="form-floating">
-                <input type="email" formControlName="email" class="form-control" id="email" readonly>
-                <label for="email" class="control-label">Email address</label>
+
+            <div class="input-group mb-2">
+                <div class="form-floating">
+                    <input type="email" formControlName="email" class="form-control" id="email" readonly>
+                    <label for="email" class="control-label">Email address</label>
+                </div>
             </div>
 
-            <div class="form-floating">
-                <input type="firstName" formControlName="firstName" class="form-control" id="firstName">
-                <label for="firstName" class="control-label">First Name</label>
+
+            <div class="input-group mb-2">
+                <div class="form-floating">
+                    <input type="firstName" formControlName="firstName" class="form-control" id="firstName"
+                        [readOnly]="!editMode">
+                    <label for="firstName" class="control-label">First Name</label>
+                </div>
             </div>
 
-            <div class="form-floating">
-                <input type="lastName" formControlName="lastName" class="form-control" id="lastName">
-                <label for="lastName" class="control-label">Last Name</label>
+            <div class="input-group mb-2">
+                <div class="form-floating">
+                    <input type="lastName" formControlName="lastName" class="form-control" id="lastName"
+                        [readOnly]="!editMode">
+                    <label for="lastName" class="control-label">Last Name</label>
+                </div>
             </div>
 
-            <div class="form-floating">
-                <input type="zipCode" formControlName="zipCode" class="form-control" id="zipCode">
-                <label for="zipCode" class="control-label">Zip Code</label>
-            </div>
-            <div *ngIf="updateUserForm.get('zipCode')?.invalid && updateUserForm.get('zipCode')?.touched"
-                class="alert alert-danger">
-                Invalid ZIP code
-            </div>
-
-            <div class="form-floating">
-                <input type="bioInfo" formControlName="bioInfo" class="form-control" id="bioInfo">
-                <label for="bioInfo" class="control-label">Bio Information</label>
-            </div>
-            <div *ngIf="updateUserForm.get('bioInfo')?.invalid && updateUserForm.get('bioInfo')?.touched"
-                class="alert alert-danger">
-                Invalid Bio Information
+            <div class="input-group mb-2">
+                <div class="form-floating">
+                    <input type="zipCode" formControlName="zipCode" class="form-control" id="zipCode"
+                        [readOnly]="!editMode">
+                    <label for="zipCode" class="control-label">Zip Code</label>
+                </div>
+                <div *ngIf="updateUserForm.get('zipCode')?.invalid && updateUserForm.get('zipCode')?.touched"
+                    class="alert alert-danger">
+                    Invalid ZIP code
+                </div>
             </div>
 
-            <div>
-                <button type="submit" class="btn btn-primary" [disabled]="!updateUserForm.valid || isLoading">
+            <div class="input-group mb-2">
+                <div class="form-floating">
+                    <textarea type="bioInfo" formControlName="bioInfo" class="form-control" id="bioInfo"
+                        [readOnly]="!editMode"></textarea>
+                    <label for="bioInfo" class="control-label">Bio Information</label>
+                </div>
+                <div *ngIf="updateUserForm.get('bioInfo')?.invalid && updateUserForm.get('bioInfo')?.touched"
+                    class="alert alert-danger">
+                    Invalid Bio Information
+                </div>
+            </div>
+
+            <div class="input-group">
+                <button *ngIf="!editMode" id="edit-btn" type="button" class="btn btn-secondary w-100"
+                    (click)="editMode = true">
+                    <span>Edit</span>
+                </button>
+
+                <button *ngIf="editMode" id="submit-btn" type="submit" class="btn btn-primary w-100"
+                    [disabled]="!updateUserForm.valid || isLoading">
                     <div *ngIf="isLoading" class="spinner-border" role="status">
                     </div>
 
