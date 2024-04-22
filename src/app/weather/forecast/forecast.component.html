@@ -1,19 +1,22 @@
-<section *ngIf="weather" class="vh-100" style="background-color: white;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100" style="color: #FEFEFE;">
-            <div class="col-md-9 col-lg-7 col-xl-5">
+<section *ngIf="weather">
+    <div class="container py-5" style="max-width: 900px;">
+        <div class="row d-flex justify-content-center">
+            <div class="w-100">
+                <h1 class="mb-3">{{weather.location.name}}, {{weather.location.region}}</h1>
                 <div class="widget">
                     <!-- First Widget - Current Weather -->
-                    <div class="card mb-4 gradient-custom">
-                        <div class="card-body">
+                    <div class="card mb-4">
+                        <h2 class="card-header">Current Conditions</h2>
+                        <div class="card-body text-center">
                             <!-- Current temperature -->
-                            <h1>{{weather.location.name}}, {{weather.location.region}}</h1>
-                            <h2>Current Conditions:</h2>
-                            <h2>Temperature: {{weather.current.temp_f}} &deg; F &nbsp;&nbsp;
-                                <img src="{{weather.current.condition.icon}}" alt="Current Weather Icon">
-                                💨{{weather!.current.wind_mph}}mph {{weather!.current.wind_dir}}
-                                Humidity {{weather!.current.humidity}}%
-                            </h2>
+                            <img src="{{weather.current.condition.icon}}" alt="Current Weather Icon" width="100px">
+                            <h4 class="card-text mx-1">
+                                <div class="mb-3">🌡️{{weather.current.temp_f}}&deg; F</div>
+                                <div class="mb-3">
+                                    💨 {{weather!.current.wind_mph}}mph {{weather!.current.wind_dir}}
+                                </div>
+                                <div>💧 {{weather!.current.humidity}}%</div>
+                            </h4>
                             <!-- Current weather condition icon -->
                             <!-- <img src="{{weather.current.condition.icon}}" alt="Current Weather Icon"> -->
                         </div>
@@ -21,17 +24,42 @@
                 </div>
                 <!-- Third Widget - 3-Day Forecast -->
                 <div class="widget">
-                    <div class="card mb-4 gradient-custom">
-                        <div class="card-body">
-                            <h2>3-Day Forecast</h2>
-                            <br>
+                    <div class="card mb-4">
+                        <h2 class="card-header">3-Day Forecast</h2>
+                        <div class="row row-cols-sm-3 row-cols-1 m-0 text-center">
                             <!-- Loop over the 3 days forecast -->
-                            <div *ngFor="let eachDay of weather.forecast.forecastday">
-                                <h2>{{eachDay.date}}</h2>
-                                
-                                <p>Max Temp: {{eachDay.day.maxtemp_f}} &deg; F, Min Temp: {{eachDay.day.mintemp_f}} &deg; F &nbsp;&nbsp;
-                                    {{eachDay.day.condition.text}}&nbsp;&nbsp;
-                                    <img src="{{getIcon(eachDay.day.condition.icon)}}" alt="Daily Weather Icon"></p>
+                            <div class="col p-0" *ngFor="let eachDay of weather.forecast.forecastday; let i=index">
+                                <hr class="d-sm-none w-100" *ngIf="!(i==0)">
+                                <div class="card rounded-0 border-0 h-100 bg-transparent">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h2>{{getDayOfWeek(eachDay.date_epoch)}}</h2>
+                                            <h2>{{eachDay.date.slice(5).replace("-","/")}}</h2>
+                                        </div>
+
+                                        <img class="card-img" src="{{getIcon(eachDay.day.condition.icon)}}"
+                                            alt="Daily Weather Icon" style="max-width: 120px;">
+
+
+                                        <div class="card-text">
+                                            <h4 style="min-height: 60px;">{{eachDay.day.condition.text}}</h4>
+                                            <h5>
+                                                <svg class="bi flex-shrink-0 me-2 text-primary" width="28" height="28"
+                                                    role="img" aria-label="Temp Low">
+                                                    <use xlink:href="#down-arrow" />
+                                                </svg>
+                                                {{eachDay.day.mintemp_f}}&deg; F
+                                            </h5>
+                                            <h5>
+                                                <svg class="bi flex-shrink-0 me-2 text-danger" width="28" height="28"
+                                                    role="img" aria-label="Temp High">
+                                                    <use xlink:href="#up-arrow" />
+                                                </svg>
+                                                {{eachDay.day.maxtemp_f}}&deg; F
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -39,20 +67,25 @@
 
                 <!-- Second Widget - Hourly Forecast -->
                 <div class="widget">
-                    <div class="card mb-4 gradient-custom">
+                    <div class="card mb-4">
+                        <h2 class="card-header">Hourly Forecast</h2>
                         <div class="card-body">
-                            <h2>Hourly Forecast</h2>
-                            <br>
                             <!-- Loop over the 3 days forecast -->
-                            <div *ngFor="let eachDay of weather.forecast.forecastday">
-                                <h2>{{eachDay.date}}</h2>
+                            <div class="card border-0" *ngFor="let eachDay of weather.forecast.forecastday">
+                                <div class="card-title">
+                                    <h3>{{getDayOfWeek(eachDay.date_epoch)}}</h3>
+                                    <h3>{{eachDay.date}}</h3>
+                                </div>
                                 <!-- Loop over the 24 hours -->
-                                <div *ngFor="let eachHour of eachDay.hour">
-                                    <p class="center">
-                                        {{eachHour.time.slice(11)}}: &nbsp;&nbsp;&nbsp; Temp {{eachHour.temp_f}} &deg; F
-                                        <img src="{{getIcon(eachHour.condition.icon)}}" alt="Hourly Weather Icon">
-                                        {{eachHour.condition.text}}
-                                    </p>
+                                <div class="card-body">
+                                    <div class="row border-bottom" *ngFor="let eachHour of eachDay.hour"
+                                        style="max-height: 75px;">
+                                        <div class="col mw-25">{{eachHour.time.slice(11)}} : </div>
+                                        <div class="col mw-25">{{eachHour.temp_f}}&deg; F</div>
+                                        <div class="col mw-25"><img src="{{getIcon(eachHour.condition.icon)}}"
+                                                alt="Hourly Weather Icon" style="max-height: 40px;"></div>
+                                        <div class="col mw-25">{{eachHour.condition.text}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -1,4 +1,4 @@
-<div *ngIf="weather" class="border border-dark rounded mt-n3 p-3">
+<div *ngIf="weather" class="border border-dark rounded mt-n3 p-3 bg-body">
     <div class="row">
         <div class="col-12 h3 text-center">{{weather!.location.name}}, {{weather!.location.region}}</div>
     </div>
@@ -26,8 +26,22 @@
         <div class="col-4 text-center" *ngFor="let i of [0,1,2]">
             <div>{{data.getDOW(weather!.forecast.forecastday[i].date)}}</div>
             <img class="icon" src="{{getIcon(weather!.forecast.forecastday[i].day.condition.icon)}}">
-            <div>{{weather!.forecast.forecastday[i].day.mintemp_f}}&deg;
-                {{weather!.forecast.forecastday[i].day.maxtemp_f}}&deg;</div>
+            <div>
+                <span>
+                    {{weather!.forecast.forecastday[i].day.mintemp_f}}&deg;
+                    <svg class="bi flex-shrink-0 me-2 text-primary" width="20" height="20" role="img"
+                        aria-label="Temp High">
+                        <use xlink:href="#down-arrow" />
+                    </svg>
+                </span>
+                <span>
+                    {{weather!.forecast.forecastday[i].day.maxtemp_f}}&deg;
+                    <svg class="bi flex-shrink-0 me-2 text-danger" width="20" height="20" role="img"
+                        aria-label="Temp High">
+                        <use xlink:href="#up-arrow" />
+                    </svg>
+                </span>
+            </div>
         </div>
     </div>
     <br>
