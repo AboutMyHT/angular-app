@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.header2 {
+    background-color: #A9A9A9;
+    color: #fff;
+    padding: 45px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+   
+}
+
+.gradient-custom {
+  
+    background: #64ADF3;
+
+}
+
+.carousel-indicators li {
+    background-color: #282828;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+.widget {
+    width: 100%; 
+    margin: 40px auto 0; 
+}
+
+.widget .card {
+    border-radius: 25px;
+    margin-bottom: 20px;
+}
+
+.widget .card-body {
+    padding: 4%;
+    position: relative;
+}
+
+.widget .card-body h2 {
+    position: relative;
+    top: 2px; 
+    left: 5px; 
+    margin: 0;
+    color: white; 
+    font-family: Arial, sans-serif; 
+    font-size: 24px; 
+}
+
+.widget .carousel-inner {
+    height: 200px; 
+}

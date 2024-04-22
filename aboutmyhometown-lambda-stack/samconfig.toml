@@ -54,5 +54,4 @@ parameter_overrides = [
     "Subnet2=subnet-00aa280dcd38ceb60",
     "Subnet3=subnet-01c2ceaeb6ab2c320",
     "FNEnvironment=production",
-    "CORSOrigin=www.aboutmyhometown.com",
 ]

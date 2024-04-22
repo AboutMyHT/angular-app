@@ -15,6 +15,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CurrentComponent } from './weather/current/current.component';
+import { ForecastComponent } from './weather/forecast/forecast.component';
+import { Globals } from './globals.service';
+
 
 
 
@@ -27,7 +30,8 @@ import { CurrentComponent } from './weather/current/current.component';
     SigninComponent,
     ProfileComponent,
     HomeComponent,
-    CurrentComponent
+    CurrentComponent,
+    ForecastComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule
@@ -37,7 +41,9 @@ import { CurrentComponent } from './weather/current/current.component';
     useFactory: (userService: UserService) => () => userService.initializeUser(),
     deps: [UserService],
     multi: true
-  }],
+    },
+    Globals
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

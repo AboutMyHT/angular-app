@@ -1,0 +1,739 @@
+{
+	"summary": {
+		"queryType": "NEARBY",
+		"queryTime": 52,
+		"numResults": 10,
+		"offset": 0,
+		"totalResults": 100,
+		"fuzzyLevel": 1,
+		"geoBias": {
+			"lat": 39.80172,
+			"lon": -89.64371
+		}
+	},
+	"results": [
+		{
+			"type": "POI",
+			"id": "jfZG3gYqusbabQZGwSFEEw",
+			"score": 99.9322509766,
+			"dist": 67.745771,
+			"info": "search:ta:840179000652574-US",
+			"poi": {
+				"name": "North 9th Street",
+				"categorySet": [
+					{
+						"id": 7369002
+					}
+				],
+				"categories": [
+					"car parking area",
+					"open parking area"
+				],
+				"classifications": [
+					{
+						"code": "OPEN_PARKING_AREA",
+						"names": [
+							{
+								"nameLocale": "en-US",
+								"name": "car parking area"
+							},
+							{
+								"nameLocale": "en-US",
+								"name": "open parking area"
+							}
+						]
+					}
+				]
+			},
+			"address": {
+				"streetName": "S 9Th St",
+				"municipality": "Springfield",
+				"countrySecondarySubdivision": "Sangamon",
+				"countrySubdivision": "IL",
+				"countrySubdivisionName": "Illinois",
+				"countrySubdivisionCode": "IL",
+				"postalCode": "62701",
+				"countryCode": "US",
+				"country": "United States",
+				"countryCodeISO3": "USA",
+				"freeformAddress": "S 9Th St, Springfield, IL 62701",
+				"localName": "Springfield"
+			},
+			"position": {
+				"lat": 39.802143,
+				"lon": -89.643139
+			},
+			"viewport": {
+				"topLeftPoint": {
+					"lat": 39.80304,
+					"lon": -89.64431
+				},
+				"btmRightPoint": {
+					"lat": 39.80124,
+					"lon": -89.64197
+				}
+			},
+			"entryPoints": [
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80203,
+						"lon": -89.64354
+					}
+				}
+			]
+		},
+		{
+			"type": "POI",
+			"id": "gDVP2ILlCWhrL497jb2pAw",
+			"score": 99.9106140137,
+			"dist": 89.380005,
+			"info": "search:ta:840179004613751-US",
+			"poi": {
+				"name": "Illinois National Bank ATM",
+				"categorySet": [
+					{
+						"id": 7397
+					}
+				],
+				"categories": [
+					"cash dispenser"
+				],
+				"classifications": [
+					{
+						"code": "CASH_DISPENSER",
+						"names": [
+							{
+								"nameLocale": "en-US",
+								"name": "cash dispenser"
+							}
+						]
+					}
+				]
+			},
+			"address": {
+				"streetNumber": "100",
+				"streetName": "North 9th Street",
+				"municipality": "Springfield",
+				"countrySecondarySubdivision": "Sangamon",
+				"countrySubdivision": "IL",
+				"countrySubdivisionName": "Illinois",
+				"countrySubdivisionCode": "IL",
+				"postalCode": "62701",
+				"extendedPostalCode": "62701-1306",
+				"countryCode": "US",
+				"country": "United States",
+				"countryCodeISO3": "USA",
+				"freeformAddress": "100 North 9th Street, Springfield, IL 62701",
+				"localName": "Springfield"
+			},
+			"position": {
+				"lat": 39.802179,
+				"lon": -89.642851
+			},
+			"viewport": {
+				"topLeftPoint": {
+					"lat": 39.80308,
+					"lon": -89.64402
+				},
+				"btmRightPoint": {
+					"lat": 39.80128,
+					"lon": -89.64168
+				}
+			},
+			"entryPoints": [
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80219,
+						"lon": -89.64354
+					}
+				}
+			]
+		},
+		{
+			"type": "POI",
+			"id": "_KuLnjArl_2nzsgSrcWrGA",
+			"score": 99.9095458984,
+			"dist": 90.451206,
+			"info": "search:ta:840172000001634-US",
+			"poi": {
+				"name": "East Washington Street",
+				"categorySet": [
+					{
+						"id": 7369002
+					}
+				],
+				"categories": [
+					"car parking area",
+					"open parking area"
+				],
+				"classifications": [
+					{
+						"code": "OPEN_PARKING_AREA",
+						"names": [
+							{
+								"nameLocale": "en-US",
+								"name": "car parking area"
+							},
+							{
+								"nameLocale": "en-US",
+								"name": "open parking area"
+							}
+						]
+					}
+				]
+			},
+			"address": {
+				"streetName": "East Washington Street",
+				"municipality": "Springfield",
+				"countrySecondarySubdivision": "Sangamon",
+				"countrySubdivision": "IL",
+				"countrySubdivisionName": "Illinois",
+				"countrySubdivisionCode": "IL",
+				"postalCode": "62701",
+				"countryCode": "US",
+				"country": "United States",
+				"countryCodeISO3": "USA",
+				"freeformAddress": "East Washington Street, Springfield, IL 62701",
+				"localName": "Springfield"
+			},
+			"position": {
+				"lat": 39.801092,
+				"lon": -89.643037
+			},
+			"viewport": {
+				"topLeftPoint": {
+					"lat": 39.80199,
+					"lon": -89.64421
+				},
+				"btmRightPoint": {
+					"lat": 39.80019,
+					"lon": -89.64187
+				}
+			},
+			"entryPoints": [
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80164,
+						"lon": -89.64333
+					}
+				}
+			]
+		},
+		{
+			"type": "POI",
+			"id": "WlNShlE9zEdRh79g6-4qNA",
+			"score": 99.8943862915,
+			"dist": 105.613885,
+			"info": "search:ta:840179001727650-US",
+			"poi": {
+				"name": "Marine Bank",
+				"phone": "+1 217-753-1390",
+				"categorySet": [
+					{
+						"id": 7328
+					}
+				],
+				"categories": [
+					"bank"
+				],
+				"classifications": [
+					{
+						"code": "BANK",
+						"names": [
+							{
+								"nameLocale": "en-US",
+								"name": "bank"
+							}
+						]
+					}
+				]
+			},
+			"address": {
+				"streetNumber": "901",
+				"streetName": "East Adams Street",
+				"municipality": "Springfield",
+				"countrySecondarySubdivision": "Sangamon",
+				"countrySubdivision": "IL",
+				"countrySubdivisionName": "Illinois",
+				"countrySubdivisionCode": "IL",
+				"postalCode": "62701",
+				"extendedPostalCode": "62701-1611",
+				"countryCode": "US",
+				"country": "United States",
+				"countryCodeISO3": "USA",
+				"freeformAddress": "901 East Adams Street, Springfield, IL 62701",
+				"localName": "Springfield"
+			},
+			"position": {
+				"lat": 39.80082,
+				"lon": -89.643315
+			},
+			"viewport": {
+				"topLeftPoint": {
+					"lat": 39.80172,
+					"lon": -89.64449
+				},
+				"btmRightPoint": {
+					"lat": 39.79992,
+					"lon": -89.64214
+				}
+			},
+			"entryPoints": [
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80052,
+						"lon": -89.64333
+					}
+				}
+			]
+		},
+		{
+			"type": "POI",
+			"id": "OxNy48nCtqPiCxAA-zaj2g",
+			"score": 99.8943862915,
+			"dist": 105.613885,
+			"info": "search:ta:840179000918976-US",
+			"poi": {
+				"name": "Greco Sales",
+				"phone": "+1 217-528-2548",
+				"categorySet": [
+					{
+						"id": 9361013
+					}
+				],
+				"categories": [
+					"electrical, office it: consumer electronics",
+					"shop"
+				],
+				"classifications": [
+					{
+						"code": "SHOP",
+						"names": [
+							{
+								"nameLocale": "en-US",
+								"name": "electrical, office it: consumer electronics"
+							},
+							{
+								"nameLocale": "en-US",
+								"name": "shop"
+							}
+						]
+					}
+				]
+			},
+			"address": {
+				"streetNumber": "901",
+				"streetName": "East Adams Street",
+				"municipality": "Springfield",
+				"countrySecondarySubdivision": "Sangamon",
+				"countrySubdivision": "IL",
+				"countrySubdivisionName": "Illinois",
+				"countrySubdivisionCode": "IL",
+				"postalCode": "62701",
+				"extendedPostalCode": "62701-1611",
+				"countryCode": "US",
+				"country": "United States",
+				"countryCodeISO3": "USA",
+				"freeformAddress": "901 East Adams Street, Springfield, IL 62701",
+				"localName": "Springfield"
+			},
+			"position": {
+				"lat": 39.80082,
+				"lon": -89.643315
+			},
+			"viewport": {
+				"topLeftPoint": {
+					"lat": 39.80172,
+					"lon": -89.64449
+				},
+				"btmRightPoint": {
+					"lat": 39.79992,
+					"lon": -89.64214
+				}
+			},
+			"entryPoints": [
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80052,
+						"lon": -89.64333
+					}
+				}
+			]
+		},
+		{
+			"type": "POI",
+			"id": "tXYW3as5r9U0XdXhicEvBA",
+			"score": 99.8757858276,
+			"dist": 124.216709,
+			"info": "search:ta:840171000001052-US",
+			"poi": {
+				"name": "Prairie Capital Convention Center",
+				"phone": "+1 217-788-8800",
+				"categorySet": [
+					{
+						"id": 9377
+					}
+				],
+				"url": "www.springfieldpccc.com",
+				"categories": [
+					"exhibition convention center"
+				],
+				"classifications": [
+					{
+						"code": "EXHIBITION_CONVENTION_CENTER",
+						"names": [
+							{
+								"nameLocale": "en-US",
+								"name": "exhibition convention center"
+							}
+						]
+					}
+				]
+			},
+			"address": {
+				"streetNumber": "801",
+				"streetName": "E Adams St",
+				"municipality": "Springfield",
+				"neighbourhood": "Downtown Springfield",
+				"countrySecondarySubdivision": "Sangamon",
+				"countrySubdivision": "IL",
+				"countrySubdivisionName": "Illinois",
+				"countrySubdivisionCode": "IL",
+				"postalCode": "62701",
+				"countryCode": "US",
+				"country": "United States",
+				"countryCodeISO3": "USA",
+				"freeformAddress": "801 E Adams St, Springfield, IL 62701",
+				"localName": "Springfield"
+			},
+			"position": {
+				"lat": 39.800812,
+				"lon": -89.644557
+			},
+			"viewport": {
+				"topLeftPoint": {
+					"lat": 39.80171,
+					"lon": -89.64573
+				},
+				"btmRightPoint": {
+					"lat": 39.79991,
+					"lon": -89.64339
+				}
+			},
+			"entryPoints": [
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80108,
+						"lon": -89.64505
+					}
+				},
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80167,
+						"lon": -89.645
+					}
+				},
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80052,
+						"lon": -89.64505
+					}
+				}
+			]
+		},
+		{
+			"type": "POI",
+			"id": "csUPB4iMzz_GrHO635eDjw",
+			"score": 99.8756027222,
+			"dist": 124.403682,
+			"info": "search:ta:840177000081249-US",
+			"poi": {
+				"name": "The Bos Center",
+				"categorySet": [
+					{
+						"id": 7316
+					}
+				],
+				"url": "theboscenter.com/",
+				"categories": [
+					"tourist information office"
+				],
+				"classifications": [
+					{
+						"code": "TOURIST_INFORMATION_OFFICE",
+						"names": [
+							{
+								"nameLocale": "en-US",
+								"name": "tourist information office"
+							}
+						]
+					}
+				]
+			},
+			"address": {
+				"streetNumber": "1",
+				"streetName": "Convention Center Plaza",
+				"municipality": "Springfield",
+				"neighbourhood": "Downtown Springfield",
+				"countrySecondarySubdivision": "Sangamon",
+				"countrySubdivision": "IL",
+				"countrySubdivisionName": "Illinois",
+				"countrySubdivisionCode": "IL",
+				"postalCode": "62701",
+				"extendedPostalCode": "62701-1620",
+				"countryCode": "US",
+				"country": "United States",
+				"countryCodeISO3": "USA",
+				"freeformAddress": "1 Convention Center Plaza, Springfield, IL 62701",
+				"localName": "Springfield"
+			},
+			"position": {
+				"lat": 39.801084,
+				"lon": -89.644908
+			},
+			"viewport": {
+				"topLeftPoint": {
+					"lat": 39.80198,
+					"lon": -89.64608
+				},
+				"btmRightPoint": {
+					"lat": 39.80018,
+					"lon": -89.64374
+				}
+			},
+			"entryPoints": [
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80108,
+						"lon": -89.64505
+					}
+				}
+			]
+		},
+		{
+			"type": "POI",
+			"id": "mpaiNb8W2z10nEXAGBfffg",
+			"score": 99.8756027222,
+			"dist": 124.403682,
+			"info": "search:ta:840177000109704-US",
+			"poi": {
+				"name": "Plaza Parking Garage",
+				"phone": "+1 217-788-8147",
+				"categorySet": [
+					{
+						"id": 7313
+					}
+				],
+				"categories": [
+					"parking garage"
+				],
+				"classifications": [
+					{
+						"code": "PARKING_GARAGE",
+						"names": [
+							{
+								"nameLocale": "en-US",
+								"name": "parking garage"
+							}
+						]
+					}
+				]
+			},
+			"address": {
+				"streetNumber": "1",
+				"streetName": "Convention Center Plaza",
+				"municipality": "Springfield",
+				"neighbourhood": "Downtown Springfield",
+				"countrySecondarySubdivision": "Sangamon",
+				"countrySubdivision": "IL",
+				"countrySubdivisionName": "Illinois",
+				"countrySubdivisionCode": "IL",
+				"postalCode": "62701",
+				"extendedPostalCode": "62701-1620",
+				"countryCode": "US",
+				"country": "United States",
+				"countryCodeISO3": "USA",
+				"freeformAddress": "1 Convention Center Plaza, Springfield, IL 62701",
+				"localName": "Springfield"
+			},
+			"position": {
+				"lat": 39.801084,
+				"lon": -89.644908
+			},
+			"viewport": {
+				"topLeftPoint": {
+					"lat": 39.80198,
+					"lon": -89.64608
+				},
+				"btmRightPoint": {
+					"lat": 39.80018,
+					"lon": -89.64374
+				}
+			},
+			"entryPoints": [
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80108,
+						"lon": -89.64505
+					}
+				}
+			]
+		},
+		{
+			"type": "POI",
+			"id": "1LX8JIlG-px37xMab9XzWg",
+			"score": 99.8756027222,
+			"dist": 124.403682,
+			"info": "search:ta:840179001427673-US",
+			"poi": {
+				"name": "Ticketmaster",
+				"phone": "+1 217-744-3968",
+				"categorySet": [
+					{
+						"id": 9352
+					}
+				],
+				"categories": [
+					"company"
+				],
+				"classifications": [
+					{
+						"code": "COMPANY",
+						"names": [
+							{
+								"nameLocale": "en-US",
+								"name": "company"
+							}
+						]
+					}
+				]
+			},
+			"address": {
+				"streetNumber": "1",
+				"streetName": "Convention Center Plaza",
+				"municipality": "Springfield",
+				"neighbourhood": "Downtown Springfield",
+				"countrySecondarySubdivision": "Sangamon",
+				"countrySubdivision": "IL",
+				"countrySubdivisionName": "Illinois",
+				"countrySubdivisionCode": "IL",
+				"postalCode": "62701",
+				"extendedPostalCode": "62701-1620",
+				"countryCode": "US",
+				"country": "United States",
+				"countryCodeISO3": "USA",
+				"freeformAddress": "1 Convention Center Plaza, Springfield, IL 62701",
+				"localName": "Springfield"
+			},
+			"position": {
+				"lat": 39.801084,
+				"lon": -89.644908
+			},
+			"viewport": {
+				"topLeftPoint": {
+					"lat": 39.80198,
+					"lon": -89.64608
+				},
+				"btmRightPoint": {
+					"lat": 39.80018,
+					"lon": -89.64374
+				}
+			},
+			"entryPoints": [
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80108,
+						"lon": -89.64505
+					}
+				}
+			]
+		},
+		{
+			"type": "POI",
+			"id": "VHmO8oHDjEFTTwchnbr2Sw",
+			"score": 99.8756027222,
+			"dist": 124.403682,
+			"info": "search:ta:840179001296091-US",
+			"poi": {
+				"name": "Springfield Metrpltn Expstn",
+				"phone": "+1 217-788-8800",
+				"categorySet": [
+					{
+						"id": 9352039
+					}
+				],
+				"url": "www.springfieldpccc.com",
+				"categories": [
+					"company",
+					"services"
+				],
+				"classifications": [
+					{
+						"code": "COMPANY",
+						"names": [
+							{
+								"nameLocale": "en-US",
+								"name": "company"
+							},
+							{
+								"nameLocale": "en-US",
+								"name": "services"
+							}
+						]
+					}
+				]
+			},
+			"address": {
+				"streetNumber": "1",
+				"streetName": "Convention Center Plaza",
+				"municipality": "Springfield",
+				"neighbourhood": "Downtown Springfield",
+				"countrySecondarySubdivision": "Sangamon",
+				"countrySubdivision": "IL",
+				"countrySubdivisionName": "Illinois",
+				"countrySubdivisionCode": "IL",
+				"postalCode": "62701",
+				"extendedPostalCode": "62701-1620",
+				"countryCode": "US",
+				"country": "United States",
+				"countryCodeISO3": "USA",
+				"freeformAddress": "1 Convention Center Plaza, Springfield, IL 62701",
+				"localName": "Springfield"
+			},
+			"position": {
+				"lat": 39.801084,
+				"lon": -89.644908
+			},
+			"viewport": {
+				"topLeftPoint": {
+					"lat": 39.80198,
+					"lon": -89.64608
+				},
+				"btmRightPoint": {
+					"lat": 39.80018,
+					"lon": -89.64374
+				}
+			},
+			"entryPoints": [
+				{
+					"type": "main",
+					"position": {
+						"lat": 39.80108,
+						"lon": -89.64505
+					}
+				}
+			]
+		}
+	]
+}

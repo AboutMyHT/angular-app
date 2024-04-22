@@ -24,6 +24,15 @@ export class DataService {
             console.log(res)))
     }
 
+    getCity(zip: number): Observable<Response> {
+        let postBody = {
+            "table": "apidata",
+            "type": "city",
+            "zip": zip
+        }
+        return this.http.post<Response>(this.lambdaURL, postBody);
+    }
+
 
     getDOW(date: string) {
         //date in format "2024-02-20 6:08"

@@ -1,0 +1,169 @@
+{
+    "success": true,
+    "result": {
+        "state": {
+            "currency": "usd",
+            "name": "Illinois",
+            "lowerName": "illinois",
+            "gasoline": "3.900",
+            "midGrade": "4.395",
+            "premium": "4.830",
+            "diesel": "4.088"
+        },
+        "cities": [
+            {
+                "currency": "usd",
+                "gasoline": "3.756",
+                "midGrade": "4.213",
+                "premium": "4.580",
+                "diesel": "4.031",
+                "name": "Bloomington-Normal",
+                "lowerName": "bloomington-normal"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.637",
+                "midGrade": "4.080",
+                "premium": "4.418",
+                "diesel": "4.005",
+                "name": "Champaign-Urbana",
+                "lowerName": "champaign-urbana"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "4.070",
+                "midGrade": "4.549",
+                "premium": "5.027",
+                "diesel": "4.190",
+                "name": "Chicago Metro",
+                "lowerName": "chicago metro"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.742",
+                "midGrade": "4.202",
+                "premium": "4.592",
+                "diesel": "3.915",
+                "name": "Decatur",
+                "lowerName": "decatur"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.775",
+                "midGrade": "4.180",
+                "premium": "4.543",
+                "diesel": "4.096",
+                "name": "Peoria-Pekin",
+                "lowerName": "peoria-pekin"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.852",
+                "midGrade": "4.355",
+                "premium": "4.751",
+                "diesel": "3.980",
+                "name": "Rockford",
+                "lowerName": "rockford"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.762",
+                "midGrade": "4.224",
+                "premium": "4.600",
+                "diesel": "3.957",
+                "name": "Springfield",
+                "lowerName": "springfield"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.726",
+                "midGrade": "4.151",
+                "premium": "4.583",
+                "diesel": "4.153",
+                "name": "Davenport-Moline-Rock Island (IL only)",
+                "lowerName": "davenport-moline-rock island (il only)"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.813",
+                "midGrade": "4.244",
+                "premium": "4.581",
+                "diesel": "4.060",
+                "name": "East Saint Louis",
+                "lowerName": "east saint louis"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.862",
+                "midGrade": "4.261",
+                "premium": "4.627",
+                "diesel": "3.937",
+                "name": "Quincy",
+                "lowerName": "quincy"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.725",
+                "midGrade": "4.116",
+                "premium": "4.513",
+                "diesel": "4.049",
+                "name": "Danville",
+                "lowerName": "danville"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "4.332",
+                "midGrade": "4.825",
+                "premium": "5.319",
+                "diesel": "4.687",
+                "name": "City of Chicago",
+                "lowerName": "city of chicago"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.799",
+                "midGrade": "0.000",
+                "premium": "0.000",
+                "diesel": "0.000",
+                "name": "Alexander County",
+                "lowerName": "alexander county"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.718",
+                "midGrade": "4.155",
+                "premium": "4.529",
+                "diesel": "4.054",
+                "name": "Carbondale-Marion",
+                "lowerName": "carbondale-marion"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.893",
+                "midGrade": "4.388",
+                "premium": "4.854",
+                "diesel": "4.051",
+                "name": "Elgin",
+                "lowerName": "elgin"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.791",
+                "midGrade": "4.246",
+                "premium": "4.625",
+                "diesel": "3.970",
+                "name": "Kankakee-Bradley",
+                "lowerName": "kankakee-bradley"
+            },
+            {
+                "currency": "usd",
+                "gasoline": "3.940",
+                "midGrade": "4.418",
+                "premium": "4.928",
+                "diesel": "3.979",
+                "name": "Lake County",
+                "lowerName": "lake county"
+            }
+        ]
+    }
+}
