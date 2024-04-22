@@ -1,7 +1,7 @@
 <section class="py-5 text-center container">
   <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Example Page</h1>
+      <h1 class="fw-light">Home</h1>
       <p class="">Zip code: {{zipCode}}</p>
       <input id="zipCode" class="text-center" type="number" maxLength="5" minlength="5" placeholder="zip code">
       <p>
@@ -12,14 +12,11 @@
     </div>
   </div>
 </section>
+
 <div class="album py-5 bg-light">
-
-  <div class="container">
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <div class="col">
-        <a href="/forecast?zipCode={{zipCode}}"><app-current [zipCode]='zipCode'></app-current></a>
-      </div>
+  <div class="container" style="max-width: 900px;">
+    <div class="col w-75 mx-auto">
+      <a href="/forecast?zipCode={{zipCode}}" id="widget"><app-current [zipCode]='zipCode'></app-current></a>
     </div>
   </div>
 </div>
