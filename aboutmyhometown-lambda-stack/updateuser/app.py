@@ -69,6 +69,7 @@ def lambda_handler(event, context):
                 zip_code=post_body["zip_code"],
                 first_name=post_body.get("first_name"),
                 last_name=post_body.get("last_name"),
+                bio_info=post_body.get("bio_info"),
             )
 
             # Get the user from the database to confirm the modification

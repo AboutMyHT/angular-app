@@ -4,12 +4,13 @@ export class User {
         public zipCode: string,
         public firstName: string,
         public lastName: string,
+        public bioInfo: string,
         public emailVerified: boolean,
         public needsPasswordReset: boolean
     ) { };
 
     static fromObject(data: any): User {
-        return new User(data.email, data.zip_code, data.first_name, data.last_name, data.email_verified, data.needs_password_reset);
+        return new User(data.email, data.zip_code, data.first_name, data.last_name, data.bio_info, data.email_verified, data.needs_password_reset);
     }
 
     public fiveDigitZip(): number {

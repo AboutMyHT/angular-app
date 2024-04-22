@@ -28,7 +28,7 @@ export class ForecastComponent implements OnInit {
         window.location.href = "/"
       }
     })
-  this.data.getWeather(this.zipCode).subscribe(res => {
+    this.data.getWeather(this.zipCode).subscribe(res => {
       var response: Response = <Response>res;
       this.weather = <WeatherData>(JSON.parse(response.body.Item.data));
       console.log(this.weather);
@@ -38,6 +38,12 @@ export class ForecastComponent implements OnInit {
   getIcon(url: string) {
     let iconList = url.split("/");
     return (`../assets/weathericons/${iconList[iconList.length - 2]}/${iconList[iconList.length - 1]}`)
+  }
+
+  getDayOfWeek(epoch_time: number) {
+    let a = new Date(epoch_time * 1000);
+    let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    return days[a.getDay()];
   }
 
 }

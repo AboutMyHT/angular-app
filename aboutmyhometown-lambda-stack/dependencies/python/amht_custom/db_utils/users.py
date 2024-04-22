@@ -79,6 +79,7 @@ def modify_user(
     zip_code: str = None,
     first_name: str = None,
     last_name: str = None,
+    bio_info: str = None,
     email_verified: bool = False,
     needs_password_reset: bool = False,
     forgot_password_token: str = None,
@@ -103,6 +104,9 @@ def modify_user(
 
     if last_name is not None:
         user.last_name = html.escape(last_name)
+
+    if bio_info is not None:
+        user.bio_info = html.escape(bio_info)
 
     if email_verified is not None:
         user.email_verified = email_verified

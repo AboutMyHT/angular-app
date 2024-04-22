@@ -54,6 +54,7 @@ export class UserService {
     zipCode: string,
     firstName: string = "",
     lastName: string = "",
+    bioInfo: string = "",
     successCallback: Function = () => { },
     failureCallback: Function = () => { },
   ): Promise<boolean> {
@@ -65,6 +66,7 @@ export class UserService {
         zip_code: zipCode,
         first_name: firstName,
         last_name: lastName,
+        bio_info: bioInfo,
       }).pipe(
         map(response => response.user)
       ));

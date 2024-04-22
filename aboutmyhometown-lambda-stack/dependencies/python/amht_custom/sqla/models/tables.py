@@ -17,6 +17,7 @@ class User(Base):
     # Optional account info
     first_name = Column(String(45), nullable=True)
     last_name = Column(String(45), nullable=True)
+    bio_info = Column(String(256), nullable=True)
 
     # Utility fields
     email_verified = Column(Boolean, nullable=False, default=False)
@@ -44,6 +45,7 @@ class User(Base):
             "email": self.email,
             "first_name": self.first_name,
             "last_name": self.last_name,
+            "bio_info": self.bio_info,
             "zip_code": self.zip_code,
             "email_verified": self.email_verified,
             "needs_password_reset": self.needs_password_reset,
