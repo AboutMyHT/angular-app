@@ -22,6 +22,7 @@ export class ProfileComponent {
     this.updateUserForm = new FormGroup({
       firstName: new FormControl(this.currentUser.firstName),
       lastName: new FormControl(this.currentUser.lastName),
+      bioInfo: new FormControl(this.currentUser.bioInfo, [Validators.maxLength(256)]),
       email: new FormControl(this.currentUser.email, [Validators.required, Validators.email]),
       zipCode: new FormControl(this.currentUser.zipCode, [Validators.required, Validators.pattern(/^\d{5}(-\d{4})?$/)]),
     })
@@ -43,6 +44,7 @@ export class ProfileComponent {
         this.updateUserForm.get('zipCode')?.value!,
         this.updateUserForm.get('firstName')?.value!,
         this.updateUserForm.get('lastName')?.value!,
+        this.updateUserForm.get('bioInfo')?.value!,
         (userData: User) => { // Success callback
           this.stopLoading();
           window.location.reload();

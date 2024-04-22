@@ -58,6 +58,15 @@
                 Invalid ZIP code
             </div>
 
+            <div class="form-floating">
+                <input type="bioInfo" formControlName="bioInfo" class="form-control" id="bioInfo">
+                <label for="bioInfo" class="control-label">Bio Information</label>
+            </div>
+            <div *ngIf="updateUserForm.get('bioInfo')?.invalid && updateUserForm.get('bioInfo')?.touched"
+                class="alert alert-danger">
+                Invalid Bio Information
+            </div>
+
             <div>
                 <button type="submit" class="btn btn-primary" [disabled]="!updateUserForm.valid || isLoading">
                     <div *ngIf="isLoading" class="spinner-border" role="status">
