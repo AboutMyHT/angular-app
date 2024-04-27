@@ -13,11 +13,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./forecast.component.css']
 })
 export class ForecastComponent implements OnInit {
-  zipCode: number;
+  zipCode: number = 0;
   weather: WeatherData | null = null;
 
   constructor(private userService: UserService, private data: DataService, private route: ActivatedRoute) {
-    this.zipCode = this.userService.currentUser?.fiveDigitZip()!;
+    // this.zipCode = this.userService.currentUser?.fiveDigitZip()!;
   }
 
 

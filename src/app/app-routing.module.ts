@@ -13,6 +13,7 @@ import { WeatherComponent } from './weather/weather.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ForecastComponent } from './weather/forecast/forecast.component';
+import { RestaurantsComponent } from './restaurant/restaurants/restaurants.component';
 
 
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'signin', component: SigninComponent, canActivate: [guestGuard] },
   { path: 'forecast', component: ForecastComponent, canActivate: [authGuard] },
+  { path: 'restaurants', component: RestaurantsComponent, canActivate: [authGuard] },
   { path: '**', component: PageNotFoundComponent }
 ]
 

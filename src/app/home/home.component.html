@@ -15,8 +15,14 @@
 
 <div class="album py-5 bg-light">
   <div class="container" style="max-width: 900px;">
+    <div class="row">
     <div class="col w-75 mx-auto">
-      <a href="/forecast?zipCode={{zipCode}}" id="widget"><app-current [zipCode]='zipCode'></app-current></a>
+      <app-current [zipCode]='zipCode'></app-current>
     </div>
+    <div class="col w-75 mx-auto">
+      <app-restaurant-widget [zipCode]='zipCode'></app-restaurant-widget>
+      
+    </div>
+  </div>
   </div>
 </div>

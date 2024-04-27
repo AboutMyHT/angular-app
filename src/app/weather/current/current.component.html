@@ -8,6 +8,9 @@
                     {{weather!.current.last_updated.slice(11)}}</small></small></div>
     </div>
     <div class="row">
+        <a class="btn btn-primary" href="/forecast?zipCode={{zipCode}}">Click here for more details</a>
+    </div>
+    <div class="row">
         <div class="col-4 text-end align-bottom"><img class="mainicon"
                 src="{{getIcon(weather!.current.condition.icon)}}"></div>
         <div class="col-8">
@@ -23,10 +26,27 @@
     </div>
     <div class="row">&nbsp;</div>
     <div class="row">
-        <div class="col-4 text-center" *ngFor="let i of [0,1,2]">
-            <div>{{data.getDOW(weather!.forecast.forecastday[i].date)}}</div>
-            <img class="icon" src="{{getIcon(weather!.forecast.forecastday[i].day.condition.icon)}}">
-            <div>
+        <div class="col-4 text-center" *ngFor="let eachDay of weather.forecast.forecastday">
+            <div>{{data.getDOW(eachDay.date)}}</div>
+            <img class="icon" src="{{getIcon(eachDay.day.condition.icon)}}">
+
+            <div class="card-text">
+                <h5>
+                    <svg class="bi flex-shrink-0 me-2 text-primary" width="28" height="28"
+                        role="img" aria-label="Temp Low">
+                        <use xlink:href="#down-arrow" />
+                    </svg>
+                    {{eachDay.day.mintemp_f}}&deg; F
+                </h5>
+                <h5>
+                    <svg class="bi flex-shrink-0 me-2 text-danger" width="28" height="28"
+                        role="img" aria-label="Temp High">
+                        <use xlink:href="#up-arrow" />
+                    </svg>
+                    {{eachDay.day.maxtemp_f}}&deg; F
+                </h5>
+            </div>
+<!-- <div>
                 <span>
                     {{weather!.forecast.forecastday[i].day.mintemp_f}}&deg;
                     <svg class="bi flex-shrink-0 me-2 text-primary" width="20" height="20" role="img"
@@ -41,7 +61,7 @@
                         <use xlink:href="#up-arrow" />
                     </svg>
                 </span>
-            </div>
+            </div> -->
         </div>
     </div>
     <br>

@@ -1,0 +1,38 @@
+<section *ngIf="restaurantList">
+    <div class="container py-5" style="max-width: 900px;">
+        <div class="row d-flex justify-content-center">
+            <div class="w-100">
+                <h1 class="mb-3">Local Restaurants</h1>
+                <div class="widget">
+                    <div class="card mb-4">
+                        <h2 class="card-header inline">Restaurants in {{zipCode}} zip code</h2>
+                        <label for="cars">Filter Restaurants:</label>
+                        <select #Cat name="Category" (change)="onFilter(Cat.value)">
+                          <option *ngFor="let Category of categoryList" value="{{Category}}">{{Category}}</option>
+                        </select>                       
+                        <div class="card-body">
+                            <table>
+                                <tr>
+                                    <th class="like-a-link" (click)="onSort($event)">Name</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th *ngIf="Cat.value == 'All'; else elseCat" class="like-a-link" (click)="onSort($event)">Category</th>
+                                    <ng-template #elseCat><th>Category</th></ng-template>
+                                    <th>Web Site</th>
+                                </tr>
+                                <tr *ngFor="let eachRestaurant of restaurantList">
+                                    <td>{{eachRestaurant.poi.name}}</td>
+                                    <td>{{eachRestaurant.address.streetNumber}} {{eachRestaurant.address.streetName}}</td>
+                                    <td>{{data.getRestaurantPhone(eachRestaurant)}}</td>
+                                    <td>{{data.getRestaurantCategory(eachRestaurant)}}</td>
+                                    <td><a *ngIf="eachRestaurant.poi.url; else noUrl" href="http://{{eachRestaurant.poi.url}}" target="_blank"><img src='../../assets/www-icon.png' style='height: 25px'></a></td>
+                                    <ng-template #noUrl><td>&nbsp;</td></ng-template>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
