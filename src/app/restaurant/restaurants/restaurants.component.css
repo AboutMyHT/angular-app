@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+}
+
+tr {
+    border: black solid 1px;
+}
+
+td {
+    padding: 10px;
+}
+
+tr:nth-child(even) {
+    background-color:#f2f2d6;
+}
+
+tr:nth-child(odd) {
+    background-color: lightgray;
+}
+
+.inline {
+    display: inline;
+}

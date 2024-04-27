@@ -23,13 +23,13 @@ export class CurrentComponent implements OnInit {
   @Input() zipCode: number = 0;
   data = new DataService(this.http);
   weather: WeatherData | null = null;
-  cityData: CityData | null = null;
-
-  
 
   ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.zipCode == 0) {
+      return;
+    }
     this.data.getWeather(this.zipCode).subscribe(res => {
       var response: Response = <Response>res;
       this.weather = <WeatherData>(JSON.parse(response.body.Item.data));

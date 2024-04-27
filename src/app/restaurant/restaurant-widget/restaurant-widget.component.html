@@ -1,0 +1,11 @@
+<div class="border border-dark rounded mt-n3 p-3 bg-body" style="height: 700;">
+    <div class="row">
+        <div *ngIf="restaurantList" class="col-12 h5 text-center">{{restaurantList.length}} Restaurants found in {{zipCode}}</div>
+    </div>
+    <div class="row align-center">
+        <a class="btn btn-primary" href="/restaurants?zipCode={{zipCode}}">Click Here for details</a>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+    </div>
+</div>

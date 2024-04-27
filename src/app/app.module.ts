@@ -17,9 +17,9 @@ import { HomeComponent } from './home/home.component';
 import { CurrentComponent } from './weather/current/current.component';
 import { ForecastComponent } from './weather/forecast/forecast.component';
 import { Globals } from './globals.service';
-
-
-
+import { RestaurantComponent } from './restaurant/restaurant.component';
+import { RestaurantsComponent } from './restaurant/restaurants/restaurants.component';
+import { RestaurantWidgetComponent } from './restaurant/restaurant-widget/restaurant-widget.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,10 @@ import { Globals } from './globals.service';
     ProfileComponent,
     HomeComponent,
     CurrentComponent,
-    ForecastComponent
+    ForecastComponent,
+    RestaurantComponent,
+    RestaurantsComponent,
+    RestaurantWidgetComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule
@@ -46,6 +49,7 @@ import { Globals } from './globals.service';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 
 }
