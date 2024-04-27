@@ -294,3 +294,12 @@ $RECYCLE.BIN/
 
 
 !aboutmyhometown-lambda-stack/dependencies/python/*/*
+
+# TEX
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.synctex.gz
