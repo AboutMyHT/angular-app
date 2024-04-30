@@ -233,7 +233,7 @@ There are few assumptions from the end user, though as mentioned above, we will 
     5.0.0              & The application must have a RESTful API that allows for the creation, reading, updating, and deletion of user data    \\
 
     \hline\hline
-    5.1.0              & This API must be available ath the 'api' subdomain of the application site                                            \\
+    5.1.0              & This API must be available at the 'api' subdomain of the application site                                             \\
 
     \hline\hline
     5.2.0              & All API specifications must return the User object as JSON on a succesful result, otherwise return an HTTP error code \\
@@ -299,6 +299,84 @@ This figure shows the initial wireframed designs for our sign in page, homepage,
 \newpage
 
 \section{Testing Documentation}
+
+\textbf{Note:} for all testing, you need to completely set up your environment. This means running at least:
+\begin{verbatim}
+    npm install
+\end{verbatim}
+
+\subsection{End to End Testing}
+
+This application supports full end to end testing of the application completely locally on the developer's machine. This is done in a few stages, with each stage representing a different part of the infrastructure.
+
+Regardless of how you decide to test, if you follow either guide to set up the application listed below, you can access the application at \url{http://localhost:4200}. This allows the developer to see the application as the end user would see it, while having the ability to immediately test and see any changes they make.
+
+\subsubsection{Piece by Piece}
+\begin{itemize}
+    \item \textbf{Frontend:} The frontend is tested using the Angular CLI. The following will start the Angular CLI locally:
+
+          \begin{verbatim}
+    ng serve --open --watch --port 4200
+          \end{verbatim}
+
+          Once the Angular CLI is running, you can access the application at \url{http://localhost:4200}.
+
+    \item \textbf{Database:} The database is tested by spinning up a MySQL Docker container. The following will start the MySQL container:
+
+          \begin{verbatim}
+    docker run --name my-local-mysql \\
+        -e MYSQL_ROOT_PASSWORD=localpass \\
+        -e MYSQL_DATABASE=mydb -p 3306:3306 -d mysql:latest \\
+        --default-authentication-plugin=mysql_native_password
+        \end{verbatim}
+
+          This will start a \textit{local and not-for-production} MySQL container with the root password set to 'localpass', the database name set to 'mydb', and the container will be accessible on port 3306.
+
+    \item \textbf{Backend:} The backend is tested using the AWS SAM CLI. The following will start the SAM API locally:
+
+          \begin{verbatim}
+    cd aboutmyhometown-lambda-stack
+    sam local start-api -p 4201
+          \end{verbatim}
+
+          Once the SAM API is running, you can access the API at \url{http://localhost:4201}.
+\end{itemize}
+
+\subsubsection{Helpers}
+
+While you can test the application piece by piece, we have set up a much simpler way to test. The following will start the entire application locally all at once, handling seting up and tearing down the database, and starting the frontend and backend:
+
+\begin{verbatim}
+    npm run start-all
+\end{verbatim}
+
+Or, for Linux users:
+
+\begin{verbatim}
+    npm run start-all-linux
+\end{verbatim}
+
+\subsection{AWS CloudFormation Testing}
+
+The AWS infrastructure deployed from this repository (the API Gateway and Lambda functions) can be tested using the AWS SAM CLI as well. The following command can be used to validate that the templates are valid configurations:
+
+\begin{verbatim}
+    sam validate -t aboutmyhometown-lambda-stack/template.yaml
+\end{verbatim}
+
+\subsection{Unit Testing}
+
+\setlength{\tabcolsep}{3mm}
+\begin{tabular}{|c|c|l|l|l|}
+    \hline
+    Test & Requirement & Rationale & Input   & Expected \\
+
+    \hline
+    1    & 1.0.0       & Example   & Example & Example  \\
+    \hline
+\end{tabular}
+
+
 
 \newpage
 
