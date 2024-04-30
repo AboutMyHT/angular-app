@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{titlesec}
+\usepackage{subcaption}
 
 \geometry{a4paper, margin=1in}
 
@@ -252,13 +253,54 @@ There are few assumptions from the end user, though as mentioned above, we will 
     \hline
 \end{tabular}
 
+\newpage
+
 \section{Design Documentation}
+
+The following design elements were composed prior to any work on the application, and should generally be followed throughout the development process.
 
 \subsection{Architecture Diagrams}
 
+This diagram shows the layout of the AWS architecture we are using for our application. The user interacts with the CloudFront Distribution, which then sends the request to the S3 bucket. The S3 bucket then returns the static template for the site to the end user.
+
+From there, the user's browser interacts with the API Gateway, which then sends the request to the Lambda function. The Lambda function then interacts with the DynamoDB database to get or set the user's data. If no live data is available, the Lambda function will then interact with the external API to get the data.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{images/aws_architecture_layout.png}
+    \caption{AWS Architecture Layout}
+    \label{fig:architecture}
+\end{figure}
+
 \subsection{Wireframes}
 
+\begin{figure}[htbp]
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/homepage.png}
+        \caption{Home Page}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/widgets_page.png}
+        \caption{Widgets Page}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/sign_in_page.png}
+        \caption{Another Page}
+    \end{subfigure}
+\end{figure}
+
+This figure shows the initial wireframed designs for our sign in page, homepage, and widgets page. We added to these designs, but the overall design philosophy remained the same.
+
+\newpage
+
 \section{Testing Documentation}
+
+\newpage
 
 \section{Known Bugs}
 
