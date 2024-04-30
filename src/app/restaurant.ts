@@ -14,31 +14,45 @@ export interface Restaurant {
             }
         ],
         "categories": string[]
-        "classifications": 
+        "classifications":
+        {
+            "code": string
+            "names":
             {
-                "code": string
-                "names": 
-                    {
-                        "nameLocale": string
-                        "name": string
-                    }[]
+                "nameLocale": string
+                "name": string
             }[]
+        }[],
+        "openingHours": {
+            "timeRanges": {
+                "startTime": {
+                    "date": string
+                    "hour": number
+                    "minute": number
+                },
+                "endTime": {
+                    "date": string
+                    "hour": number
+                    "minute": number
+                }[]
+            }
+        }
     },
     "address": {
         "streetNumber": string
-        "streetName":  string
-        "municipality":  string
-        "countrySecondarySubdivision":  string
-        "countrySubdivision":  string
-        "countrySubdivisionName":  string
-        "countrySubdivisionCode":  string
-        "postalCode":  string
-        "extendedPostalCode":  string
-        "countryCode":  string
-        "country":  string
-        "countryCodeISO3":  string
-        "freeformAddress":  string
-        "localName":  string
+        "streetName": string
+        "municipality": string
+        "countrySecondarySubdivision": string
+        "countrySubdivision": string
+        "countrySubdivisionName": string
+        "countrySubdivisionCode": string
+        "postalCode": string
+        "extendedPostalCode": string
+        "countryCode": string
+        "country": string
+        "countryCodeISO3": string
+        "freeformAddress": string
+        "localName": string
     },
     "position": {
         "lat": number

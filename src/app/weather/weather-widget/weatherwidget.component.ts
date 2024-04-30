@@ -12,11 +12,11 @@ interface SimpleChanges {
 
 
 @Component({
-  selector: 'app-current',
-  templateUrl: './current.component.html',
-  styleUrls: ['./current.component.css']
+  selector: 'app-weatherwidget',
+  templateUrl: './weatherwidget.component.html',
+  styleUrls: ['./weatherwidget.component.css']
 })
-export class CurrentComponent implements OnInit {
+export class WeatherWidgetComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
