@@ -1,5 +1,5 @@
 #!/bin/bash
 
-$PYTHONPATH=dependencies/python/amht_custom
+export PYTHONPATH="dependencies/python"
 
 python -m pytest tests
