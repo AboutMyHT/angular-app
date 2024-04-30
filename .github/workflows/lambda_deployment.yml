@@ -24,7 +24,7 @@ jobs:
           python-version: "3.12"
 
       - name: Test lambda functions
-        run: ./run_tests.sh
+        run: chmod +x run_tests.sh && ./run_tests.sh
 
   build-deploy-lambda-functions:
     if: startsWith(github.event.ref, 'refs/tags/v')
