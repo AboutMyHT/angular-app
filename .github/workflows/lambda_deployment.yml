@@ -11,6 +11,21 @@ on:
     branches: ["main"]
 
 jobs:
+  test-lambda-functions:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: aboutmyhometown-lambda-stack
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test lambda functions
+        run: ./run_tests.sh
+
   build-deploy-lambda-functions:
     if: startsWith(github.event.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
@@ -30,10 +45,6 @@ jobs:
           aws-region: us-east-2
       # sam build
       - run: sam build --use-container
-
-      # Run Unit tests
-      - name: Test
-        run: echo "This is a test step"
 
       # sam deploy
       - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name aboutmyhometown-lambda-stack --capabilities CAPABILITY_IAM --region us-east-2 --config-env production
