@@ -152,6 +152,8 @@ There are few assumptions from the end user, though as mentioned above, we will 
     3.3.4              & To authenticate a user's existing session, the local token must be one of the known session tokens   \\
     \hline
     3.3.5              & If a token is older than 24 hours, invalidate it and force log out the user                          \\
+    \hline
+    3.3.6              & A valid session token must be required for all user update or modification requests                  \\
 
     \hline\hline
     3.4.0              & Users must be able to log out of their account, invalidating the session                             \\
@@ -298,6 +300,10 @@ This figure shows the initial wireframed designs for our sign in page, homepage,
 
 \newpage
 
+\section{Source Code Documentation}
+
+\newpage
+
 \section{Testing Documentation}
 
 \textbf{Note:} for all testing, you need to completely set up your environment. This means running at least:
@@ -366,17 +372,87 @@ The AWS infrastructure deployed from this repository (the API Gateway and Lambda
 
 \subsection{Unit Testing}
 
+\subsubsection{Backend API Unit Tests}
+
+The unit tests for the backend API are written in Python and can be found in the \textit{aboutmyhometown-lambda-stack/tests} directory. These run automatically in the CI/CD pipeline for the lambda deployment.
+
+\textbf{Session Tests:}
+
 \setlength{\tabcolsep}{3mm}
-\begin{tabular}{|c|c|l|l|l|}
+\begin{tabular}{|c|c|p{5cm}|p{3cm}|p{3cm}|}
     \hline
-    Test & Requirement & Rationale & Input   & Expected \\
+    Test & Req.         & Rationale                                                             & Input                            & Expected             \\
 
     \hline
-    1    & 1.0.0       & Example   & Example & Example  \\
+    1    & 3.3.x; 5.5.0 & The session token parameter is required at the session token endpoint & Session token is not provided    & HTTP 400 is returned \\
+    \hline
+    2    & 3.3.x; 5.5.0 & An invalid session token is not accepted                              & An invalid token                 & HTTP 401 is returned \\
+    \hline
+    3    & 3.3.x; 5.5.0 & A valid session token is returns user information                     & A valid session token for a user & HTTP 200 is returned \\
+    \hline
+    4    & 3.3.x; 5.5.0 & An internal error returns invalid token                               & An unhandled internal data type  & HTTP 401 is returned \\
+    \hline
+    5    & 3.3.x; 5.5.0 & An invalid JSON object provided returns an error                      & An invalid JSON body             & HTTP 400 is returned \\
     \hline
 \end{tabular}
 
+\textbf{Sign In Tests:}
 
+\setlength{\tabcolsep}{3mm}
+\begin{tabular}{|c|c|p{5cm}|p{3cm}|p{3cm}|}
+    \hline
+    Test & Req.  & Rationale                                        & Input                        & Expected                                     \\
+
+    \hline
+    6    & 3.1.0 & Valid credentials return a valid user object     & Valid user credentials       & HTTP 200 and proper user object are returned \\
+    \hline
+    7    & 5.4.0 & An invalid password fails to authenticate        & An invalid password          & HTTP 401 is returned                         \\
+    \hline
+    8    & 5.4.0 & Missing email or password fails to authenticate  & Missing username or password & HTTP 400 is returned                         \\
+    \hline
+    9    & 5.4.0 & An invalid JSON object provided returns an error & An invalid JSON body         & HTTP 400 is returned                         \\
+    \hline
+\end{tabular}
+
+\textbf{Sign Up Tests:}
+
+\setlength{\tabcolsep}{3mm}
+\begin{tabular}{|c|c|p{5cm}|p{3cm}|p{3cm}|}
+    \hline
+    Test & Req.         & Rationale                                                             & Input                                                       & Expected                                    \\
+
+    \hline
+    10   & 2.0.x; 5.3.0 & All required parameters are really required for account creation      & User creation request missing zip code or email             & HTTP 400 is returned                        \\
+    \hline
+    11   & 3.0.0        & All user's emails must be unique                                      & A user who's email address already exists in database       & HTTP 400 is returned                        \\
+    \hline
+    12   & 2.0.x        & Given valid and enough information, a user can succesfully be created & Valid information for a new user                            & HTTP 200 and valid user object are returned \\
+    \hline
+    13   & 2.1.x        & Given optional user information, a user can succesfully be created    & Valid information for a new user, including optional fields & HTTP 200 and valid user object are returned \\
+    \hline
+    14   & 5.3.0        & An invalid JSON object provided returns an error                      & An invalid JSON body                                        & HTTP 400 is returned                        \\
+    \hline
+\end{tabular}
+
+\textbf{Modify User Tests:}
+
+\setlength{\tabcolsep}{3mm}
+\begin{tabular}{|c|c|p{5cm}|p{3cm}|p{3cm}|}
+    \hline
+    Test & Req.  & Rationale                                                            & Input                                               & Expected                                      \\
+
+    \hline
+    15   & 4.6.0 & All required parameters are required for user modification           & User modification request missing zip code or email & HTTP 400 is returned                          \\
+    \hline
+    16   & 3.3.6 & Invalid session tokens deny user modifications                       & User modification request missing zip code or email & HTTP 400 is returned                          \\
+    \hline
+    17   & 3.3.6 & Given new user info and a valid session token, a user can be updated & Valid user email and session token                  & HTTP 200 and updated user object are returned \\
+    \hline
+    18   & 4.6.0 & Non-existant users are gracefully handled                            & Invalid user email provided to session              & HTTP 400 is returned                          \\
+    \hline
+    19   & 4.6.0 & An invalid JSON object provided returns an error                     & An invalid JSON body                                & HTTP 400 is returned                          \\
+    \hline
+\end{tabular}
 
 \newpage
 

@@ -1,3 +1,12 @@
+"""All tests in this file are for the signin lambda function.
+
+Related requirements:
+    - 3.1.0
+    - 3.2.x
+    - 3.3.x
+    - 5.4.0
+"""
+
 import json
 
 from signin import app
@@ -6,6 +15,7 @@ from amht_custom.sqla.models.tables import User
 
 
 def test_lambda_handler_valid_credentials(mocker):
+    """Test 6 | Test that a valid email and password returns a 200 status code and the user's information and session token."""
     mocker.patch("signin.app.check_password", return_value=True)
     mocker.patch(
         "signin.app.get_user",
@@ -35,6 +45,7 @@ def test_lambda_handler_valid_credentials(mocker):
 
 
 def test_lambda_handler_invalid_password(mocker):
+    """Test 7 | Test that an invalid password returns a 401 status code."""
     mocker.patch("signin.app.get_rds_session")
     mocker.patch("signin.app.check_password", return_value=False)
 
@@ -47,6 +58,7 @@ def test_lambda_handler_invalid_password(mocker):
 
 
 def test_lambda_handler_missing_parameters(mocker):
+    """Test 8 | Test that missing email and password parameters returns a 400 status code."""
     mocker.patch("signin.app.get_rds_session")
 
     apigw_event = {
@@ -60,6 +72,7 @@ def test_lambda_handler_missing_parameters(mocker):
 
 
 def test_lambda_handler_invalid_json(mocker):
+    """Test 9 | Test that invalid JSON returns a 400 status code."""
     mocker.patch("signin.app.get_rds_session")
 
     apigw_event = {"body": "invalid json"}

@@ -1,3 +1,13 @@
+"""All tests in this file are for the signup lambda function.
+
+Related requirements:
+    - 2.0.x
+    - 2.1.x
+    - 3.0.0
+    - 3.2.x
+    - 5.3.0
+"""
+
 import json
 
 from signup import app
@@ -6,6 +16,7 @@ from amht_custom.sqla.models.tables import User
 
 
 def test_signup_missing_parameters(mocker):
+    """Test 10 | Test that missing email, password, or zip code parameters returns a 400 status code."""
     mocker.patch("signup.app.get_rds_session")
     body = json.dumps(
         {"email": "test@test.com", "password": "pass"}
@@ -33,6 +44,7 @@ def test_signup_missing_parameters(mocker):
 
 
 def test_user_already_exists(mocker):
+    """Test 11 | Test that a user already existing in the database returns a 400 status code."""
     mocker.patch("signup.app.get_rds_session")
     mocker.patch("signup.app.create_user", side_effect=ValueError("User exists"))
     body = json.dumps(
@@ -47,6 +59,7 @@ def test_user_already_exists(mocker):
 
 
 def test_successful_user_creation(mocker):
+    """Test 12 | Test that a successful user creation returns a 200 status code and the user's information."""
     mocker.patch("signup.app.get_rds_session")
     mocker.patch("signup.app.create_user")
     mocker.patch(
@@ -78,6 +91,7 @@ def test_successful_user_creation(mocker):
 
 
 def test_signup_with_full_user_details(mocker):
+    """Test 13 | Test that a successful user creation with full user details returns a 200 status code and the user's information."""
     mocker.patch("signup.app.get_rds_session")
     mocker.patch("signup.app.create_user")
     mocker.patch(
@@ -112,6 +126,7 @@ def test_signup_with_full_user_details(mocker):
 
 
 def test_lambda_handler_invalid_json(mocker):
+    """Test 14 | Test that invalid JSON returns a 400 status code."""
     mocker.patch("signin.app.get_rds_session")
 
     apigw_event = {"body": "invalid json"}
