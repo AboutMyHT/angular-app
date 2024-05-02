@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{titlesec}
+\usepackage{subcaption}
 
 \geometry{a4paper, margin=1in}
 
@@ -151,6 +152,8 @@ There are few assumptions from the end user, though as mentioned above, we will 
     3.3.4              & To authenticate a user's existing session, the local token must be one of the known session tokens   \\
     \hline
     3.3.5              & If a token is older than 24 hours, invalidate it and force log out the user                          \\
+    \hline
+    3.3.6              & A valid session token must be required for all user update or modification requests                  \\
 
     \hline\hline
     3.4.0              & Users must be able to log out of their account, invalidating the session                             \\
@@ -232,7 +235,7 @@ There are few assumptions from the end user, though as mentioned above, we will 
     5.0.0              & The application must have a RESTful API that allows for the creation, reading, updating, and deletion of user data    \\
 
     \hline\hline
-    5.1.0              & This API must be available ath the 'api' subdomain of the application site                                            \\
+    5.1.0              & This API must be available at the 'api' subdomain of the application site                                             \\
 
     \hline\hline
     5.2.0              & All API specifications must return the User object as JSON on a succesful result, otherwise return an HTTP error code \\
@@ -252,13 +255,206 @@ There are few assumptions from the end user, though as mentioned above, we will 
     \hline
 \end{tabular}
 
+\newpage
+
 \section{Design Documentation}
+
+The following design elements were composed prior to any work on the application, and should generally be followed throughout the development process.
 
 \subsection{Architecture Diagrams}
 
+This diagram shows the layout of the AWS architecture we are using for our application. The user interacts with the CloudFront Distribution, which then sends the request to the S3 bucket. The S3 bucket then returns the static template for the site to the end user.
+
+From there, the user's browser interacts with the API Gateway, which then sends the request to the Lambda function. The Lambda function then interacts with the DynamoDB database to get or set the user's data. If no live data is available, the Lambda function will then interact with the external API to get the data.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{images/aws_architecture_layout.png}
+    \caption{AWS Architecture Layout}
+    \label{fig:architecture}
+\end{figure}
+
 \subsection{Wireframes}
 
+\begin{figure}[htbp]
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/homepage.png}
+        \caption{Home Page}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/widgets_page.png}
+        \caption{Widgets Page}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/sign_in_page.png}
+        \caption{Another Page}
+    \end{subfigure}
+\end{figure}
+
+This figure shows the initial wireframed designs for our sign in page, homepage, and widgets page. We added to these designs, but the overall design philosophy remained the same.
+
+\newpage
+
+\section{Source Code Documentation}
+
+\newpage
+
 \section{Testing Documentation}
+
+\textbf{Note:} for all testing, you need to completely set up your environment. This means running at least:
+\begin{verbatim}
+    npm install
+\end{verbatim}
+
+\subsection{End to End Testing}
+
+This application supports full end to end testing of the application completely locally on the developer's machine. This is done in a few stages, with each stage representing a different part of the infrastructure.
+
+Regardless of how you decide to test, if you follow either guide to set up the application listed below, you can access the application at \url{http://localhost:4200}. This allows the developer to see the application as the end user would see it, while having the ability to immediately test and see any changes they make.
+
+\subsubsection{Piece by Piece}
+\begin{itemize}
+    \item \textbf{Frontend:} The frontend is tested using the Angular CLI. The following will start the Angular CLI locally:
+
+          \begin{verbatim}
+    ng serve --open --watch --port 4200
+          \end{verbatim}
+
+          Once the Angular CLI is running, you can access the application at \url{http://localhost:4200}.
+
+    \item \textbf{Database:} The database is tested by spinning up a MySQL Docker container. The following will start the MySQL container:
+
+          \begin{verbatim}
+    docker run --name my-local-mysql \\
+        -e MYSQL_ROOT_PASSWORD=localpass \\
+        -e MYSQL_DATABASE=mydb -p 3306:3306 -d mysql:latest \\
+        --default-authentication-plugin=mysql_native_password
+        \end{verbatim}
+
+          This will start a \textit{local and not-for-production} MySQL container with the root password set to 'localpass', the database name set to 'mydb', and the container will be accessible on port 3306.
+
+    \item \textbf{Backend:} The backend is tested using the AWS SAM CLI. The following will start the SAM API locally:
+
+          \begin{verbatim}
+    cd aboutmyhometown-lambda-stack
+    sam local start-api -p 4201
+          \end{verbatim}
+
+          Once the SAM API is running, you can access the API at \url{http://localhost:4201}.
+\end{itemize}
+
+\subsubsection{Helpers}
+
+While you can test the application piece by piece, we have set up a much simpler way to test. The following will start the entire application locally all at once, handling seting up and tearing down the database, and starting the frontend and backend:
+
+\begin{verbatim}
+    npm run start-all
+\end{verbatim}
+
+Or, for Linux users:
+
+\begin{verbatim}
+    npm run start-all-linux
+\end{verbatim}
+
+\subsection{AWS CloudFormation Testing}
+
+The AWS infrastructure deployed from this repository (the API Gateway and Lambda functions) can be tested using the AWS SAM CLI as well. The following command can be used to validate that the templates are valid configurations:
+
+\begin{verbatim}
+    sam validate -t aboutmyhometown-lambda-stack/template.yaml
+\end{verbatim}
+
+\subsection{Unit Testing}
+
+\subsubsection{Backend API Unit Tests}
+
+The unit tests for the backend API are written in Python and can be found in the \textit{aboutmyhometown-lambda-stack/tests} directory. These run automatically in the CI/CD pipeline for the lambda deployment.
+
+\textbf{Session Tests:}
+
+\setlength{\tabcolsep}{3mm}
+\begin{tabular}{|c|c|p{5cm}|p{3cm}|p{3cm}|}
+    \hline
+    Test & Req.         & Rationale                                                             & Input                            & Expected             \\
+
+    \hline
+    1    & 3.3.x; 5.5.0 & The session token parameter is required at the session token endpoint & Session token is not provided    & HTTP 400 is returned \\
+    \hline
+    2    & 3.3.x; 5.5.0 & An invalid session token is not accepted                              & An invalid token                 & HTTP 401 is returned \\
+    \hline
+    3    & 3.3.x; 5.5.0 & A valid session token is returns user information                     & A valid session token for a user & HTTP 200 is returned \\
+    \hline
+    4    & 3.3.x; 5.5.0 & An internal error returns invalid token                               & An unhandled internal data type  & HTTP 401 is returned \\
+    \hline
+    5    & 3.3.x; 5.5.0 & An invalid JSON object provided returns an error                      & An invalid JSON body             & HTTP 400 is returned \\
+    \hline
+\end{tabular}
+
+\textbf{Sign In Tests:}
+
+\setlength{\tabcolsep}{3mm}
+\begin{tabular}{|c|c|p{5cm}|p{3cm}|p{3cm}|}
+    \hline
+    Test & Req.  & Rationale                                        & Input                        & Expected                                     \\
+
+    \hline
+    6    & 3.1.0 & Valid credentials return a valid user object     & Valid user credentials       & HTTP 200 and proper user object are returned \\
+    \hline
+    7    & 5.4.0 & An invalid password fails to authenticate        & An invalid password          & HTTP 401 is returned                         \\
+    \hline
+    8    & 5.4.0 & Missing email or password fails to authenticate  & Missing username or password & HTTP 400 is returned                         \\
+    \hline
+    9    & 5.4.0 & An invalid JSON object provided returns an error & An invalid JSON body         & HTTP 400 is returned                         \\
+    \hline
+\end{tabular}
+
+\textbf{Sign Up Tests:}
+
+\setlength{\tabcolsep}{3mm}
+\begin{tabular}{|c|c|p{5cm}|p{3cm}|p{3cm}|}
+    \hline
+    Test & Req.         & Rationale                                                             & Input                                                       & Expected                                    \\
+
+    \hline
+    10   & 2.0.x; 5.3.0 & All required parameters are really required for account creation      & User creation request missing zip code or email             & HTTP 400 is returned                        \\
+    \hline
+    11   & 3.0.0        & All user's emails must be unique                                      & A user who's email address already exists in database       & HTTP 400 is returned                        \\
+    \hline
+    12   & 2.0.x        & Given valid and enough information, a user can succesfully be created & Valid information for a new user                            & HTTP 200 and valid user object are returned \\
+    \hline
+    13   & 2.1.x        & Given optional user information, a user can succesfully be created    & Valid information for a new user, including optional fields & HTTP 200 and valid user object are returned \\
+    \hline
+    14   & 5.3.0        & An invalid JSON object provided returns an error                      & An invalid JSON body                                        & HTTP 400 is returned                        \\
+    \hline
+\end{tabular}
+
+\textbf{Modify User Tests:}
+
+\setlength{\tabcolsep}{3mm}
+\begin{tabular}{|c|c|p{5cm}|p{3cm}|p{3cm}|}
+    \hline
+    Test & Req.  & Rationale                                                            & Input                                               & Expected                                      \\
+
+    \hline
+    15   & 4.6.0 & All required parameters are required for user modification           & User modification request missing zip code or email & HTTP 400 is returned                          \\
+    \hline
+    16   & 3.3.6 & Invalid session tokens deny user modifications                       & User modification request missing zip code or email & HTTP 400 is returned                          \\
+    \hline
+    17   & 3.3.6 & Given new user info and a valid session token, a user can be updated & Valid user email and session token                  & HTTP 200 and updated user object are returned \\
+    \hline
+    18   & 4.6.0 & Non-existant users are gracefully handled                            & Invalid user email provided to session              & HTTP 400 is returned                          \\
+    \hline
+    19   & 4.6.0 & An invalid JSON object provided returns an error                     & An invalid JSON body                                & HTTP 400 is returned                          \\
+    \hline
+\end{tabular}
+
+\newpage
 
 \section{Known Bugs}
 
