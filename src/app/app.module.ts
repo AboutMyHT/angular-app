@@ -7,7 +7,6 @@ import { APP_INITIALIZER } from '@angular/core';
 import { UserService } from './user.service';
 
 import { AppComponent } from './app.component';
-import { CardComponent } from './card/card.component';
 import { SigninComponent } from './signin/signin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +20,6 @@ import { RestaurantWidgetComponent } from './restaurant/restaurant-widget/restau
 @NgModule({
   declarations: [
     AppComponent,
-    CardComponent,
     SigninComponent,
     ProfileComponent,
     HomeComponent,

@@ -11,6 +11,7 @@ import { User } from './user';
 export class AppComponent {
   isLoggedIn: boolean;
   currentUser: User;
+  title = 'aboutmyhometown.com';
 
   constructor(userService: UserService) {
     this.isLoggedIn = userService.isLoggedIn();

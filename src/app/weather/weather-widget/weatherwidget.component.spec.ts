@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
 
 import { WeatherWidgetComponent } from './weatherwidget.component';
 
@@ -6,9 +8,11 @@ describe('CurrentComponent', () => {
   let component: WeatherWidgetComponent;
   let fixture: ComponentFixture<WeatherWidgetComponent>;
 
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WeatherWidgetComponent]
+      declarations: [WeatherWidgetComponent],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
     
@@ -20,4 +24,5 @@ describe('CurrentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

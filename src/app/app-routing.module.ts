@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { authGuard } from './auth.guard';
@@ -7,9 +6,7 @@ import { guestGuard } from './guest.guard';
 
 import { SigninComponent } from './signin/signin.component';
 import { AboutComponent } from './about/about.component';
-// import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-// import { WeatherComponent } from './weather/weather.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WeatherForecastComponent } from './weather/weather-forcast/weatherforecast.component';

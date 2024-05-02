@@ -3,13 +3,10 @@ import { DataService } from 'src/app/data.service';
 import { WeatherData } from 'src/app/weather-data';
 import { HttpClient } from '@angular/common/http';
 import { Response } from 'src/app/response';
-import { CityData } from 'src/app/city-data'
-import { Globals } from 'src/app/globals.service';
 
 interface SimpleChanges {
   __index(zip: number): SimpleChanges
 }
-
 
 @Component({
   selector: 'app-weatherwidget',
@@ -37,21 +34,17 @@ export class WeatherWidgetComponent implements OnInit {
   }
 
 
-  getTemp(units: string) {
-    if (units == 'c') {
-      return (this.weather!.current.temp_c + "\xB0C");
-    } else {
-      return (this.weather!.current.temp_f + "\xB0F");
-    }
-  }
+  // getTemp(temp: number, units: string) {
+  //   return ( "\xB0C");
+  // }
 
-  getFeelsLike(units: string) {
-    if (units == 'c') {
-      return (this.weather!.current.feelslike_c + "\xB0C");
-    } else {
-      return (this.weather!.current.feelslike_f + "\xB0F");
-    }
-  }
+  // getFeelsLike(units: string) {
+  //   if (units == 'c') {
+  //     return (this.weather!.current.feelslike_c + "\xB0C");
+  //   } else {
+  //     return (this.weather!.current.feelslike_f + "\xB0F");
+  //   }
+  // }
 
   getIcon(url: string) {
     let iconList = url.split("/");

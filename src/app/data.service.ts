@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
-import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
+import { Observable, filter } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Response } from './response';
 import { Restaurant } from './restaurant';
-
 
 @Injectable({
     providedIn: 'root'
 })
+
 export class DataService {
 
-    lambdaURL = "https://zxrppsvwue.execute-api.us-east-2.amazonaws.com/dev"
+    apiGatewayURL = "https://aqw8pgiwx8.execute-api.us-east-2.amazonaws.com/prod"
 
     constructor(private http: HttpClient) { }
 
@@ -20,16 +20,7 @@ export class DataService {
             "type": "weather",
             "zip": zip
         }
-        return this.http.post<Response>(this.lambdaURL, postBody);
-    }
-
-    getCity(zip: number): Observable<Response> {
-        let postBody = {
-            "table": "apidata",
-            "type": "city",
-            "zip": zip
-        }
-        return this.http.post<Response>(this.lambdaURL, postBody);
+        return this.http.post<Response>(this.apiGatewayURL, postBody);
     }
 
     getRestaurants(zip: number): Observable<Response> {
@@ -38,8 +29,7 @@ export class DataService {
             "type": "restaurants",
             "zip": zip
         }
-        return this.http.post<Response>(this.lambdaURL, postBody).pipe(tap(res =>
-            console.log(res)))
+        return this.http.post<Response>(this.apiGatewayURL, postBody);
     }
 
     getRestaurantPhone(r: Restaurant): string {
@@ -60,6 +50,7 @@ export class DataService {
 
     filterRestaurantsByCategory(restaurants: Restaurant[], category: string): any {
         let filteredRestaurants = restaurants.filter(r => this.getRestaurantCategory(r) == category)
+        filteredRestaurants.join('restaurant')
         return filteredRestaurants
     }
 
@@ -81,6 +72,5 @@ export class DataService {
         const days = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun']
         return (days[(new Date(date)).getDay()])
     }
-
 
 }

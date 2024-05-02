@@ -23,7 +23,7 @@ export interface Restaurant {
                 "name": string
             }[]
         }[],
-        "openingHours": {
+        "openingHours"?: {
             "timeRanges": {
                 "startTime": {
                     "date": string

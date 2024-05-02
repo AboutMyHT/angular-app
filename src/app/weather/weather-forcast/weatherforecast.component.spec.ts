@@ -1,14 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+
 
 import { WeatherForecastComponent } from './weatherforecast.component';
 
-describe('ForecastComponent', () => {
+describe('WeatherForecastComponent', () => {
   let component: WeatherForecastComponent;
   let fixture: ComponentFixture<WeatherForecastComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WeatherForecastComponent ]
+      declarations: [ WeatherForecastComponent ],
+      imports: [ HttpClientTestingModule, RouterTestingModule ]
     })
     .compileComponents();
 
@@ -20,4 +24,8 @@ describe('ForecastComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should return DOW', () => {
+    expect(component.getDayOfWeek(1714680000000)).toEqual('Friday');
+  })
 });
