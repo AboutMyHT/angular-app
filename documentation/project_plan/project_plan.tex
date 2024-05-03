@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{titlesec}
+\usepackage{float}
 
 \geometry{a4paper, margin=1in}
 
@@ -24,6 +25,8 @@
 \section{Scope Statement}\label{sec:scope}
 
 \subsection{Overview}
+
+Our website will be viewable at \href{https://www.aboutmyhometown.com}{https://www.aboutmyhometown.com}.
 
 We will construct a cross-platform web application that allows users to check on a variety of data points for their locale. This data may include, but is not limited to, gas prices, current and forecast weather, restaurant/food prices, public facilities, local businesses, and possibly crime information. The goal is to compile as much data from public or low-cost API's into a single interface, adding statistical analysis, and overlaying it into a mapping application (such as Google Maps). As a long-term goal we would like to interpret and nd news articles relating to an area of interest, and pin the location in which they took place on the map.
 
@@ -85,7 +88,12 @@ Integrate the various APIs that will be used to gather data for the application.
 Implement the overall architecture of the application, including the database, user authentication, and CI/CD.
 
 \section{Gantt Chart}
-NOT AVAILABLE
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/gantt_chart.png}
+    \caption{Gantt Chart}
+\end{figure}
 
 \section{Tools and Standards}
 
@@ -137,8 +145,14 @@ NOT AVAILABLE
 \section{Configuration Management}
 
 \subsection{GitHub}
-The project will be stored in a GitHub repository, with the main branch being the primary branch for the project. All changes will be made in feature branches, and merged into the master branch via pull requests. The project will be built and deployed via GitHub Actions.
+The project will be stored in a GitHub organization, with the main branch being the primary branch for the project. All changes will be made in feature branches, and merged into the master branch via pull requests. The project will be built and deployed via GitHub Actions.
 
 For release management, the project will use GitHub releases to track the progress of the project, and to mark major milestones. This will be done simultaneously using tags and releases.
+
+\textbf{GitHub Organization:} \href{https://github.com/AboutMyHT}{https://github.com/AboutMyHT}
+
+\textbf{Angular Application Repository:} \href{https://github.com/AboutMyHT/angular-app}{https://github.com/AboutMyHT/angular-app}
+
+\textbf{AWS Resources Repository:} \href{https://github.com/AboutMyHT/aws-resources}{https://github.com/AboutMyHT/aws-resources}
 
 \end{document}
