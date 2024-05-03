@@ -1,3 +1,7 @@
+/*
+  Purpose: This component is the root component of the application, used to handle all other components.
+  Requirements: 4.0.0
+*/
 import { Component } from '@angular/core';
 
 import { UserService } from './user.service';

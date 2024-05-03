@@ -1,3 +1,7 @@
+"""
+    Purpose: This is the Lambda function that handles the /signin API endpoint.
+    Requirements: 5.4.0
+"""
 import json
 import logging
 

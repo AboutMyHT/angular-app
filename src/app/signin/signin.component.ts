@@ -1,3 +1,7 @@
+/*
+  Purpose: This component handles the sign in AND sign up pages of the application.
+  Requirements: 4.3.x; 4.4.x
+*/
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';

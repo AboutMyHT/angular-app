@@ -1,3 +1,7 @@
+/*
+  Purpose: This class represents a user of the application.
+  Requirements: None
+*/
 export class User {
     constructor(
         public email: string,

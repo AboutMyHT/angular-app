@@ -36,7 +36,7 @@ import { RestaurantWidgetComponent } from './restaurant/restaurant-widget/restau
     useFactory: (userService: UserService) => () => userService.initializeUser(),
     deps: [UserService],
     multi: true
-    },
+  },
     Globals
   ],
   bootstrap: [AppComponent]

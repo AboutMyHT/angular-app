@@ -1,3 +1,7 @@
+/*
+  Purpose: This component handles the home page of the application.
+  Requirements: 4.1.x
+*/
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Observable } from 'rxjs';
@@ -15,7 +19,7 @@ export class HomeComponent implements OnInit {
   public lng = "";
 
   constructor(private userService: UserService, private http: HttpClient, public globals: Globals) {
-      this.zipCode = this.userService.currentUser?.fiveDigitZip()!;
+    this.zipCode = this.userService.currentUser?.fiveDigitZip()!;
   }
 
   ngOnInit() {
@@ -35,7 +39,7 @@ export class HomeComponent implements OnInit {
           this.getZip(this.lat, this.lng).subscribe(res => {
             this.zipCode = parseInt(res['body']);
             this.globals.zipCode = this.zipCode;
-            (document.getElementById("zipCode") as  HTMLInputElement)!.value = "";
+            (document.getElementById("zipCode") as HTMLInputElement)!.value = "";
           });
         }
       },
@@ -43,15 +47,15 @@ export class HomeComponent implements OnInit {
     } else {
       alert("Geolocation is not supported by this browser.");
     }
-  }  
+  }
 
-  getZip(lat: string, lng: string): Observable<{"statusCode": number, "body": string}> {
+  getZip(lat: string, lng: string): Observable<{ "statusCode": number, "body": string }> {
     let postBody = {
       "lat": lat,
       "lng": lng
     }
     let url = "https://uoubgrd2cl.execute-api.us-east-2.amazonaws.com/dev"
-    return this.http.post<{"statusCode": number, "body": string}>(url, postBody)
+    return this.http.post<{ "statusCode": number, "body": string }>(url, postBody)
   }
 
 

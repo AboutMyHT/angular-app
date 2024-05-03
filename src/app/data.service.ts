@@ -1,3 +1,7 @@
+/*
+  Purpose: This service handles all API data requests for the application.
+  Requirements: 1.0.0; 1.1.0
+*/
 import { Injectable } from '@angular/core';
 import { Observable, filter } from 'rxjs';
 import { HttpClient } from '@angular/common/http';

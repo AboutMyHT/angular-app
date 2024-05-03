@@ -1,5 +1,7 @@
-
-
+/*
+  Purpose: This guard is used to protect routes that require the user to be UNauthenticated.
+  Requirements: 4.3.1; 4.4.1
+*/
 import { inject } from '@angular/core';
 import { Router, CanActivateFn } from '@angular/router';
 

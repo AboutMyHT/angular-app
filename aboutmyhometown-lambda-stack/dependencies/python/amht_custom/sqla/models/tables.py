@@ -1,3 +1,7 @@
+"""
+    Purpose: This module contains the ORM models for the database tables used by the AboutMyHometown API.
+    Requirements: 2.x; 3.x; 5.x
+"""
 import re
 
 from sqlalchemy.orm import validates, relationship

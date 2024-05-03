@@ -1,3 +1,7 @@
+"""
+    Purpose: This is the Lambda function that handles the /updateuser API endpoint.
+    Requirements: 5.6.0
+"""
 import json
 import logging
 

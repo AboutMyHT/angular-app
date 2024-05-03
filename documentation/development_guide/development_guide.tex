@@ -7,6 +7,7 @@
 \usepackage{hyperref}
 \usepackage{titlesec}
 \usepackage{subcaption}
+\usepackage{longtable}
 
 \geometry{a4paper, margin=1in}
 
@@ -17,6 +18,18 @@
 \begin{document}
 
 \maketitle
+
+\textbf{Important Links}
+
+\begin{itemize}
+    \item \textbf{Website:} \href{https://www.aboutmyhometown.com}{https://www.aboutmyhometown.com}
+
+    \item \textbf{GitHub Organization:} \href{https://github.com/AboutMyHT}{https://github.com/AboutMyHT}
+
+    \item \textbf{Angular Application Repository:} \href{https://github.com/AboutMyHT/angular-app}{https://github.com/AboutMyHT/angular-app}
+
+    \item \textbf{AWS Resources Repository:} \href{https://github.com/AboutMyHT/aws-resources}{https://github.com/AboutMyHT/aws-resources}
+\end{itemize}
 
 \tableofcontents
 
@@ -78,7 +91,7 @@ There are few assumptions from the end user, though as mentioned above, we will 
 \subsubsection{Data Sources (1)}
 
 \setlength{\tabcolsep}{1cm}
-\begin{tabular}{|l|p{8cm}|}
+\begin{longtable}{|l|p{8cm}|}
     \hline
     Requirement Number & Description                                                                                                          \\
 
@@ -88,12 +101,12 @@ There are few assumptions from the end user, though as mentioned above, we will 
     \hline\hline
     1.1.0              & The application must pull in the most recently available restaurant data whenever the end user loads the application \\
     \hline
-\end{tabular}
+\end{longtable}
 
 \subsubsection{User Data (2)}
 
 \setlength{\tabcolsep}{1cm}
-\begin{tabular}{|l|p{8cm}|}
+\begin{longtable}{|l|p{8cm}|}
     \hline
     Requirement Number & Description                                                            \\
 
@@ -114,12 +127,12 @@ There are few assumptions from the end user, though as mentioned above, we will 
     \hline
     2.1.2              & Bio Information, 256 character string                                  \\
     \hline
-\end{tabular}
+\end{longtable}
 
 \subsubsection{Authentication Model (3)}
 
 \setlength{\tabcolsep}{1cm}
-\begin{tabular}{|l|p{8cm}|}
+\begin{longtable}{|l|p{8cm}|}
     \hline
     Requirement Number & Description                                                                                          \\
 
@@ -158,12 +171,12 @@ There are few assumptions from the end user, though as mentioned above, we will 
     \hline\hline
     3.4.0              & Users must be able to log out of their account, invalidating the session                             \\
     \hline
-\end{tabular}
+\end{longtable}
 
 \subsubsection{User Interface (4)}
 
 \setlength{\tabcolsep}{1cm}
-\begin{tabular}{|l|p{8cm}|}
+\begin{longtable}{|l|p{8cm}|}
     \hline
     Requirement Number & Description                                                                                                     \\
 
@@ -222,12 +235,18 @@ There are few assumptions from the end user, though as mentioned above, we will 
     \hline
     4.6.2              & After submitting modifications, all data must update immediately and the page should refresh                    \\
     \hline
-\end{tabular}
+
+    \hline\hline
+    4.7.0              & The application must have a 404 page not found default route                                                    \\
+    \hline
+    4.7.1              & This page must be shown whenever the user tries to access a page that does not exist                            \\
+    \hline
+\end{longtable}
 
 \subsubsection{User API (5)}
 
 \setlength{\tabcolsep}{1cm}
-\begin{tabular}{|l|p{8cm}|}
+\begin{longtable}{|l|p{8cm}|}
     \hline
     Requirement Number & Description                                                                                                           \\
 
@@ -253,7 +272,7 @@ There are few assumptions from the end user, though as mentioned above, we will 
     5.6.0              & The API must include an endpoint to allow the user modification (update user)                                         \\
 
     \hline
-\end{tabular}
+\end{longtable}
 
 \newpage
 
@@ -300,7 +319,80 @@ This figure shows the initial wireframed designs for our sign in page, homepage,
 
 \newpage
 
-\section{Source Code Documentation}
+\section{Source Code}
+
+All code is documented in the source files themselves. This documentation is meant to be a high-level overview of the codebase. For more specific information, including each file's purpose and requirements fulfilled, please refer to the comments in the source files themselves.
+
+Each relevant code file has a header comment that describes the file's purpose and the requirements that that file fulfills.
+
+\subsection{Angular}
+
+To see this in-code documentation, always look at the `.ts' file for the component, guard, service, or class you are interested in. HTML, CSS, and other auxiliary files are not documented in this way as that would be exposed to the end user.
+
+If you are a frontend developer, this is the only section you need to be concerned with.
+
+\begin{itemize}
+    \item \href{https://github.com/AboutMyHT/angular-app/tree/main/src}{\path{src}}
+          \begin{itemize}
+              \item This top-most directory contains all of the Angular application code.
+              \item All of the files at this level (\path{main.ts}, \path{styles.ts}, etc.) are generic Angular files that are required for the application to run.
+          \end{itemize}
+    \item \href{https://github.com/AboutMyHT/angular-app/tree/main/src/app}{\path{src/app}}
+          \begin{itemize}
+              \item This directory contains all of the Angular components, services, and guards.
+              \item Each subdirectory contains represents a different component, generally representing a unique HTML display element or an entire page.
+          \end{itemize}
+\end{itemize}
+
+\subsection{Lambda}
+
+Python code is used to create the backend API, including user modifications, sign in, sign up, and session token validation. There is also a custom library used to interact with the database and handle HTTP responses.
+
+These are deployed inside lambda functions in AWS, using the AWS SAM CLI with the \path{samconfig.toml} and \path{template.yaml} file.
+
+If you are a backend developer, this is the only section you need to be concerned with.
+
+\subsubsection{Functions}
+\begin{itemize}
+    \item \href{https://github.com/AboutMyHT/angular-app/tree/main/aboutmyhometown-lambda-stack/session}{\path{aboutmyhometown-lambda-stack/session}}
+          \begin{itemize}
+              \item This directory contains the session API endpoint code.
+          \end{itemize}
+    \item \href{https://github.com/AboutMyHT/angular-app/tree/main/aboutmyhometown-lambda-stack/signin}{\path{aboutmyhometown-lambda-stack/signin}}
+          \begin{itemize}
+              \item This directory contains the sign in endpoint code.
+          \end{itemize}
+    \item \href{https://github.com/AboutMyHT/angular-app/tree/main/aboutmyhometown-lambda-stack/signup}{\path{aboutmyhometown-lambda-stack/signup}}
+          \begin{itemize}
+              \item This directory contains the sign up endpoint code.
+          \end{itemize}
+    \item \href{https://github.com/AboutMyHT/angular-app/tree/main/aboutmyhometown-lambda-stack/updateuser}{\path{aboutmyhometown-lambda-stack/updateuser}}
+          \begin{itemize}
+              \item This directory contains the update user endpoint code.
+          \end{itemize}
+    \item \href{https://github.com/AboutMyHT/angular-app/tree/main/aboutmyhometown-lambda-stack/tests}{\path{aboutmyhometown-lambda-stack/tests}}
+          \begin{itemize}
+              \item This directory contains the unit tests for the every lambda API function listed above.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Custom Library}
+\begin{itemize}
+    \item \href{https://github.com/AboutMyHT/angular-app/tree/main/aboutmyhometown-lambda-stack/dependencies/python/amht_custom}{\path{aboutmyhometown-lambda-stack/dependencies/python/amht_custom}}
+          \begin{itemize}
+              \item This directory contains a custom-written Python library that is used to interact with the database and handle HTTP responses in a consistent, safe, and secure manner.
+          \end{itemize}
+\end{itemize}
+
+\subsection{AWS Resources}
+
+The AWS resources are defined in the \href{https://github.com/AboutMyHT/aws-resources}{aws-resources} repository. This repository contains the CloudFormation templates that define the AWS resources that are used in the application.
+\begin{itemize}
+    \item \href{https://github.com/AboutMyHT/aws-resources/blob/main/primary-template.yml}{primary-template.yml}
+          \begin{itemize}
+              \item This file contains the primary CloudFormation template that defines the AWS resources that are used in the application.
+          \end{itemize}
+\end{itemize}
 
 \newpage
 
@@ -317,7 +409,7 @@ This application supports full end to end testing of the application completely 
 
 Regardless of how you decide to test, if you follow either guide to set up the application listed below, you can access the application at \url{http://localhost:4200}. This allows the developer to see the application as the end user would see it, while having the ability to immediately test and see any changes they make.
 
-\subsubsection{Piece by Piece}
+\subsubsection{Component-wise}
 \begin{itemize}
     \item \textbf{Frontend:} The frontend is tested using the Angular CLI. The following will start the Angular CLI locally:
 
@@ -374,7 +466,14 @@ The AWS infrastructure deployed from this repository (the API Gateway and Lambda
 
 \subsubsection{Backend API Unit Tests}
 
-The unit tests for the backend API are written in Python and can be found in the \textit{aboutmyhometown-lambda-stack/tests} directory. These run automatically in the CI/CD pipeline for the lambda deployment.
+The unit tests for the backend API are written in Python and can be found in the \href{https://github.com/AboutMyHT/angular-app/tree/main/aboutmyhometown-lambda-stack/tests}{\path{aboutmyhometown-lambda-stack/tests}} directory. These run automatically in the CI/CD pipeline for the lambda deployment.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/completed_api_tests.png}
+    \caption{Completed Backend API Tests}
+    \label{fig:api-tests}
+\end{figure}
 
 \textbf{Session Tests:}
 
@@ -454,6 +553,17 @@ The unit tests for the backend API are written in Python and can be found in the
     \hline
 \end{tabular}
 
+\subsubsection{Frontend Angular Testing}
+
+The unit tests for the frontend components are written in TypeScript and can be found alongside their respective components in the \href{https://github.com/AboutMyHT/angular-app/tree/main/src}{\path{src}} directory.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/completed_angular_tests.jpg}
+    \caption{Completed Angular Tests}
+    \label{fig:angular-tests}
+\end{figure}
+
 \newpage
 
 \section{Known Bugs}
@@ -463,13 +573,13 @@ The unit tests for the backend API are written in Python and can be found in the
           \begin{itemize}
               \item Any of the following redirect properly to the main site:
                     \begin{itemize}
-                        \item \url{http://aboutmyhometown.com}
-                        \item \url{http://www.aboutmyhometown.com}
-                        \item \url{https://www.aboutmyhometown.com}
+                        \item \href{http://aboutmyhometown.com}{\url{http://aboutmyhometown.com}}
+                        \item \href{http://www.aboutmyhometown.com}{\url{http://www.aboutmyhometown.com}}
+                        \item \href{https://www.aboutmyhometown.com}{\url{https://www.aboutmyhometown.com}}
                     \end{itemize}
               \item However, the following does not redirect properly:
                     \begin{itemize}
-                        \item \url{https://aboutmyhometown.com}
+                        \item \href{https://aboutmyhometown.com}{\url{https://aboutmyhometown.com}}
                     \end{itemize}
               \item This seems to be a technology issue with the way S3 redirects, and it is unable to redirect HTTPS traffic without configuring a secondary route through the CloudFront Distribution
           \end{itemize}

@@ -1,3 +1,7 @@
+/*
+  Purpose: This component handles the weather forecast page of the application.
+  Requirements: 1.0.0
+*/
 import { Component, OnInit } from '@angular/core';
 import { Globals } from 'src/app/globals.service';
 import { WeatherData } from 'src/app/weather-data';

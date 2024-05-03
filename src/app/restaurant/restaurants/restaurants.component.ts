@@ -1,3 +1,7 @@
+/*
+  Purpose: This component handles the restaurants page of the application.
+  Requirements: 1.1.0
+*/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';

@@ -1,3 +1,7 @@
+/*
+  Purpose: This component handles the weather widget of the application.
+  Requirements: 1.0.0
+*/
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 import { WeatherData } from 'src/app/weather-data';

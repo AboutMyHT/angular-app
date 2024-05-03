@@ -1,3 +1,7 @@
+/*
+  Purpose: This component handles static application routing.
+  Requirements: 4.x; 4.1.1; 4.2.1; 4.3.1; 4.5.1; 4.6.1; 4.7.x;
+*/
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

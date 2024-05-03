@@ -1,3 +1,7 @@
+"""
+    Purpose: This module contains common operations for managing, validating, and generating user sessions
+    Requirements: 3.3.x; 5.x
+"""
 import logging
 from uuid import UUID, uuid4
 from datetime import datetime, timedelta

@@ -1,3 +1,7 @@
+/*
+  Purpose: This component handles the restaurant widget of the application.
+  Requirements: 1.1.0
+*/
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 import { Restaurant } from '../../restaurant';
@@ -17,7 +21,7 @@ interface SimpleChanges {
 export class RestaurantWidgetComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
-  
+
   @Input() zipCode: number = 0;
   restaurantList: Restaurant[] | null = null;
   data: DataService = new DataService(this.http);

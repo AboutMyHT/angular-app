@@ -1,3 +1,7 @@
+"""
+    Purpose: This is the Lambda function that handles the /signup API endpoint.
+    Requirements: 5.3.0
+"""
 import json
 import logging
 

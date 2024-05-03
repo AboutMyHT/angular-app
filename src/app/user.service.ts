@@ -1,3 +1,7 @@
+/*
+  Purpose: This service is used to interact with the user API and handle all user-related data.
+  Requirements: 3.x (all auth requirements)
+*/
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
