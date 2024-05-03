@@ -1,3 +1,12 @@
+"""
+    Purpose: This is the core module for the AboutMyHometown custom Python library.
+        This module contains methods for interacting with the RDS database through
+            ORM using SQLAlchemy.
+        This module also contains the code for session management, such as token
+            generation, user authentication, and session creation.
+    
+    Requirements: 3.x; 5.x
+"""
 import os
 import logging
 

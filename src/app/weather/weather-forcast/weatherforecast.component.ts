@@ -1,3 +1,7 @@
+/*
+  Purpose: This component handles the weather forecast page of the application.
+  Requirements: 1.0.0
+*/
 import { Component, OnInit } from '@angular/core';
 import { Globals } from 'src/app/globals.service';
 import { WeatherData } from 'src/app/weather-data';
@@ -8,11 +12,11 @@ import { Response } from 'src/app/response';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-forecast',
-  templateUrl: './forecast.component.html',
-  styleUrls: ['./forecast.component.css']
+  selector: 'app-weatherforecast',
+  templateUrl: './weatherforecast.component.html',
+  styleUrls: ['./weatherforecast.component.css']
 })
-export class ForecastComponent implements OnInit {
+export class WeatherForecastComponent implements OnInit {
   zipCode: number = 0;
   weather: WeatherData | null = null;
 

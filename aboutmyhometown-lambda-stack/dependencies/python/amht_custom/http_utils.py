@@ -1,3 +1,7 @@
+"""
+    Purpose: Custom HTTP utilities for AboutMyHometown API
+    Requirements: 5.x
+"""
 import json
 
 allowed_origin = "https://www.aboutmyhometown.com"

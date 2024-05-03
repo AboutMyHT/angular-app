@@ -1,5 +1,8 @@
+/*
+  Purpose: This component handles static application routing.
+  Requirements: 4.x; 4.1.1; 4.2.1; 4.3.1; 4.5.1; 4.6.1; 4.7.x;
+*/
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { authGuard } from './auth.guard';
@@ -7,12 +10,10 @@ import { guestGuard } from './guest.guard';
 
 import { SigninComponent } from './signin/signin.component';
 import { AboutComponent } from './about/about.component';
-import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { WeatherComponent } from './weather/weather.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ForecastComponent } from './weather/forecast/forecast.component';
+import { WeatherForecastComponent } from './weather/weather-forcast/weatherforecast.component';
 import { RestaurantsComponent } from './restaurant/restaurants/restaurants.component';
 
 
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'about', component: AboutComponent },
   { path: 'signin', component: SigninComponent, canActivate: [guestGuard] },
-  { path: 'forecast', component: ForecastComponent, canActivate: [authGuard] },
+  { path: 'forecast', component: WeatherForecastComponent, canActivate: [authGuard] },
   { path: 'restaurants', component: RestaurantsComponent, canActivate: [authGuard] },
   { path: '**', component: PageNotFoundComponent }
 ]

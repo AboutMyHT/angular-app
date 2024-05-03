@@ -1,3 +1,7 @@
+"""
+    Purpose: This module contains common operations for user operations like creating, validating, and modifying users
+    Requirements: 3.0.0; 3.2.x
+"""
 import html
 import logging
 from typing import List

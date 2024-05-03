@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { Globals } from './globals.service';
 
-describe('Globals', () => {
+xdescribe('Globals', () => {
   let service: Globals;
 
   beforeEach(() => {

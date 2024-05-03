@@ -17,7 +17,7 @@
   <div class="container" style="max-width: 900px;">
     <div class="row">
     <div class="col w-75 mx-auto">
-      <app-current [zipCode]='zipCode'></app-current>
+      <app-weatherwidget [zipCode]='zipCode'></app-weatherwidget>
     </div>
     <div class="col w-75 mx-auto">
       <app-restaurant-widget [zipCode]='zipCode'></app-restaurant-widget>
@@ -26,3 +26,4 @@
   </div>
   </div>
 </div>
+<p class="small">Current location to zip information provided by <a href="https://simplemaps.com/data/us-zips" target="_blank">https://simplemaps.com/data/us-zips</a></p>

@@ -1,3 +1,7 @@
+/*
+  Purpose: This component handles the profile page of the application.
+  Requirements: 4.6.x
+*/
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';

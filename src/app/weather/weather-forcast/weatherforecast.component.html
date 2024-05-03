@@ -2,27 +2,25 @@
     <div class="container py-5" style="max-width: 900px;">
         <div class="row d-flex justify-content-center">
             <div class="w-100">
-                <h1 class="mb-3">{{weather.location.name}}, {{weather.location.region}}</h1>
+                <h1 class="mb-3">{{weather!.location.name}}, {{weather!.location.region}}</h1>
                 <div class="widget">
                     <!-- First Widget - Current Weather -->
                     <div class="card mb-4">
                         <h2 class="card-header">Current Conditions</h2>
                         <div class="card-body text-center">
                             <!-- Current temperature -->
-                            <img src="{{weather.current.condition.icon}}" alt="Current Weather Icon" width="100px">
+                            <img src="{{weather!.current.condition.icon}}" alt="Current Weather Icon" width="100px">
                             <h4 class="card-text mx-1">
-                                <div class="mb-3">🌡️{{weather.current.temp_f}}&deg; F</div>
+                                <div class="mb-3">🌡️{{weather!.current.temp_f}}&deg; F</div>
                                 <div class="mb-3">
                                     💨 {{weather!.current.wind_mph}}mph {{weather!.current.wind_dir}}
                                 </div>
                                 <div>💧 {{weather!.current.humidity}}%</div>
                             </h4>
-                            <!-- Current weather condition icon -->
-                            <!-- <img src="{{weather.current.condition.icon}}" alt="Current Weather Icon"> -->
                         </div>
                     </div>
                 </div>
-                <!-- Third Widget - 3-Day Forecast -->
+                <!-- Second Widget - 3-Day Forecast -->
                 <div class="widget">
                     <div class="card mb-4">
                         <h2 class="card-header">3-Day Forecast</h2>
@@ -65,7 +63,7 @@
                     </div>
                 </div>
 
-                <!-- Second Widget - Hourly Forecast -->
+                <!-- Third Widget - Hourly Forecast -->
                 <div class="widget">
                     <div class="card mb-4">
                         <h2 class="card-header">Hourly Forecast</h2>
@@ -90,6 +88,7 @@
                             </div>
                         </div>
                     </div>
+                    <p class="fw-light"> Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a></p>
                 </div>
             </div>
         </div>

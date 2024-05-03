@@ -1,22 +1,23 @@
+/*
+  Purpose: This component handles the weather widget of the application.
+  Requirements: 1.0.0
+*/
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 import { WeatherData } from 'src/app/weather-data';
 import { HttpClient } from '@angular/common/http';
 import { Response } from 'src/app/response';
-import { CityData } from 'src/app/city-data'
-import { Globals } from 'src/app/globals.service';
 
 interface SimpleChanges {
   __index(zip: number): SimpleChanges
 }
 
-
 @Component({
-  selector: 'app-current',
-  templateUrl: './current.component.html',
-  styleUrls: ['./current.component.css']
+  selector: 'app-weatherwidget',
+  templateUrl: './weatherwidget.component.html',
+  styleUrls: ['./weatherwidget.component.css']
 })
-export class CurrentComponent implements OnInit {
+export class WeatherWidgetComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
@@ -37,21 +38,17 @@ export class CurrentComponent implements OnInit {
   }
 
 
-  getTemp(units: string) {
-    if (units == 'c') {
-      return (this.weather!.current.temp_c + "\xB0C");
-    } else {
-      return (this.weather!.current.temp_f + "\xB0F");
-    }
-  }
+  // getTemp(temp: number, units: string) {
+  //   return ( "\xB0C");
+  // }
 
-  getFeelsLike(units: string) {
-    if (units == 'c') {
-      return (this.weather!.current.feelslike_c + "\xB0C");
-    } else {
-      return (this.weather!.current.feelslike_f + "\xB0F");
-    }
-  }
+  // getFeelsLike(units: string) {
+  //   if (units == 'c') {
+  //     return (this.weather!.current.feelslike_c + "\xB0C");
+  //   } else {
+  //     return (this.weather!.current.feelslike_f + "\xB0F");
+  //   }
+  // }
 
   getIcon(url: string) {
     let iconList = url.split("/");

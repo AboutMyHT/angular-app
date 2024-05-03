@@ -2,20 +2,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { RestaurantsComponent } from './restaurants.component';
+import { RestaurantWidgetComponent } from './restaurant-widget.component';
 
 describe('RestaurantsComponent', () => {
-  let component: RestaurantsComponent;
-  let fixture: ComponentFixture<RestaurantsComponent>;
+  let component: RestaurantWidgetComponent;
+  let fixture: ComponentFixture<RestaurantWidgetComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RestaurantsComponent ],
+      declarations: [ RestaurantWidgetComponent ],
       imports: [HttpClientTestingModule, RouterTestingModule]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RestaurantsComponent);
+    fixture = TestBed.createComponent(RestaurantWidgetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

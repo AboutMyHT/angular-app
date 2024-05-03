@@ -1,3 +1,8 @@
+/*
+  Purpose: This component handles the about page of the application.
+  Requirements: 4.2.x
+*/
+
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 

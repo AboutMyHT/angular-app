@@ -1,3 +1,7 @@
+/*
+  Purpose: This is a generic card component that can be used to display information in a card format.
+  Requirements: None
+*/
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
